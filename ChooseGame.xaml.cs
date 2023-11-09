@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Punto.Database;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,23 @@ namespace Punto
     /// </summary>
     public partial class ChooseGame : UserControl
     {
-        public ChooseGame()
+        public ObservableCollection<Game> Games { get; set; }
+        public ObservableCollection<Player> Players { get; set; }
+
+        public ChooseGame(DatabaseUse database)
         {
             InitializeComponent();
+            DataContext = this;
+
+            // Initialisez vos listes de jeux et de joueurs
+            Games = new ObservableCollection<Game>(database.GetGames());
+            Players = new ObservableCollection<Player>(database.GetPlayers());
+
+
+
+            // Chargez les jeux et les joueurs depuis votre base de données ici
+            // Exemple: Games = Database.GetGames();
+            //          Players = Database.GetPlayers();
         }
     }
 }

@@ -2280,11 +2280,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mariu\\Documents\\cours_iut\\ANNEE3\\SEMESTRE5\\R5.A.10\\Punto\\dev\\Punto\\Punto.csproj",
+      "projectUniqueName": "C:\\Users\\mariu\\Documents\\clone-git\\PuntoGames\\Punto.csproj",
       "projectName": "Punto",
-      "projectPath": "C:\\Users\\mariu\\Documents\\cours_iut\\ANNEE3\\SEMESTRE5\\R5.A.10\\Punto\\dev\\Punto\\Punto.csproj",
+      "projectPath": "C:\\Users\\mariu\\Documents\\clone-git\\PuntoGames\\Punto.csproj",
       "packagesPath": "C:\\Users\\mariu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mariu\\Documents\\cours_iut\\ANNEE3\\SEMESTRE5\\R5.A.10\\Punto\\dev\\Punto\\obj\\",
+      "outputPath": "C:\\Users\\mariu\\Documents\\clone-git\\PuntoGames\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mariu\\AppData\\Roaming\\NuGet\\NuGet.Config",

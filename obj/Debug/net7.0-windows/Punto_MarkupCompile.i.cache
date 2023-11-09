@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\mariu\Documents\cours_iut\ANNEE3\SEMESTRE5\R5.A.10\Punto\dev\Punto\obj\Debug\net7.0-windows\
+C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\
 Punto
 none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
-C:\Users\mariu\Documents\cours_iut\ANNEE3\SEMESTRE5\R5.A.10\Punto\dev\Punto\App.xaml
+C:\Users\mariu\Documents\clone-git\PuntoGames\App.xaml
 4-1659992484
 
 131356466839
 2161438081175
 ChooseGame.xaml;GameView.xaml;MainWindow.xaml;PopUpBDD.xaml;
 
-False
+True
 

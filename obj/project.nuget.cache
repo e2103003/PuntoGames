@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "V9xfKKUHPrMBtSZFl3VI2Kf/Zde+x6HwvlhL5LVZVYKVjN67iGso/xeHdtjKWWPEQW6OQnYPr1/P40PniWoJXQ==",
+  "dgSpecHash": "79nAvxLKCPrvLwEfukgk4gOYZ9lYNlhMiFOh1cnZ+5iipqvau9KRLxKMJaFQY3AO2ca2mK590MJPGZ1rGksymA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mariu\\Documents\\cours_iut\\ANNEE3\\SEMESTRE5\\R5.A.10\\Punto\\dev\\Punto\\Punto.csproj",
+  "projectFilePath": "C:\\Users\\mariu\\Documents\\clone-git\\PuntoGames\\Punto.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mariu\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\mariu\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

@@ -18,7 +18,7 @@ namespace Punto
     /// <summary>
     /// Logique d'interaction pour GameView.xaml
     /// </summary>
-    public partial class GameView : Page
+    public partial class GameView : UserControl
     {
         public GameView()
         {

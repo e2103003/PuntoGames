@@ -29,13 +29,24 @@ namespace Punto
 
         private void MySQL_Click(object sender, RoutedEventArgs e)
         {
-            string connectionString = "Server=127.0.0.1;Database=PuntoDatabase;Uid=username;Pwd=password;";
-            DatabaseUse.MySqlConnection = new MySqlConnection(connectionString);
-
+            
             try
             {
-                DatabaseUse.MySqlConnection.Open();
+                DatabaseUse database = new DatabaseUse("MySQL");
 
+
+                Window mainWindow = Window.GetWindow(this);
+
+                if (mainWindow != null)
+                {
+                    // Fermez la fenêtre actuelle (PopUpBDD).
+                    ChooseGame chooseGameView = new ChooseGame(database);
+                    mainWindow.Content = chooseGameView;
+                }
+                else
+                {
+                    MessageBox.Show("MainWindow null");
+                }
 
 
             }
@@ -45,18 +56,7 @@ namespace Punto
                 // Gérer les erreurs de connexion à la base de données ici.
             }
 
-            Window mainWindow = Window.GetWindow(this);
-
-            if (mainWindow != null)
-            {
-                // Fermez la fenêtre actuelle (PopUpBDD).
-                ChooseGame chooseGameView = new ChooseGame();
-                mainWindow.Content = chooseGameView;
-            }
-            else
-            {
-                MessageBox.Show("MainWindow null");
-            }
+            
         }
 
         private void MongoDB_Click(object sender, RoutedEventArgs e)

@@ -16,7 +16,7 @@ namespace Punto.Database
         public MySQLUse() {
             try
             {
-                string connectionString = "Server=127.0.0.1;Database=PuntoDatabase;Uid=student;Pwd=student;";
+                string connectionString = "Server=127.0.0.1;Database=PuntoDatabase;Uid=username;Pwd=password;";
                 MySqlConnection = new MySqlConnection(connectionString);
                 MySqlConnection.Open();
 

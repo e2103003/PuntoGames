@@ -10,18 +10,18 @@ using System.Windows;
 
 namespace Punto
 {
-    class DatabaseUse
+    public class DatabaseUse
     {
-        public static MySqlConnection MySqlConnection;
+        public MySqlConnection MySqlConnection;
 
         private IMongoDatabase _database;
 
         public string databaseTechno;
 
 
-        List<Player> players;
-        List<Cell> cells;
-        List<Game> games;
+        private List<Player> players;
+        private List<Cell> cells;
+        private List<Game> games;
 
 
         public DatabaseUse(string databaseTechno)
@@ -40,9 +40,6 @@ namespace Punto
                     MessageBox.Show($"Erreur connexion à la base de données MySQL : {e}");
                  
                 }
-                
-
-
             }
             else if(databaseTechno == "MongoDB")
             {
@@ -70,9 +67,11 @@ namespace Punto
         }
 
 
+        public List<Player> GetPlayers() { return players; }
+        public List<Cell> GetCells() { return cells; }
+        public List<Game> GetGames() { return games; }
 
 
-        
 
     }
 }
