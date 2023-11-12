@@ -33,7 +33,7 @@ namespace Punto
                 {
                     MySQLUse mySQLUse = new MySQLUse();
                     players = mySQLUse.LoadPlayersFromDatabase();
-                    cells = mySQLUse.LoadCellsFromDatabase();
+                    //cells = mySQLUse.LoadCellsFromDatabase();
                     games = mySQLUse.LoadGamesFromDatabase();
                 }
                 catch (Exception e){

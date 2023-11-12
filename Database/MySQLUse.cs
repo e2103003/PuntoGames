@@ -54,7 +54,7 @@ namespace Punto.Database
                     {
                         Player player = new Player
                         {
-                            Id = reader.GetInt32("Id"),
+                            Id = reader.GetInt32("id"),
                             Name = reader.GetString("Name"),
                             Color = reader.GetString("Color"),
                             Wins = reader.GetInt32("Wins")
@@ -103,11 +103,11 @@ namespace Punto.Database
                     {
                         Game game = new Game
                         {
-                            Id = reader.GetInt32("Id"),
-                            Player1Id = reader.GetInt32("Player1Id"),
-                            Player2Id = reader.GetInt32("Player2Id"),
-                            Date = reader.GetDateTime("Date"),
-                            Cells = reader.GetString("Cell")
+                            Id = reader.GetInt32("id"),
+                            Player1Id = reader.GetInt32("player1_id"),
+                            Player2Id = reader.GetInt32("player2_id"),
+                            Date = reader.GetDateTime("date"),
+                            Cells = reader.GetString("cells")
                         };
                         games.Add(game);
                     }
