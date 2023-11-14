@@ -29,44 +29,59 @@ namespace Punto
 
         private void MySQL_Click(object sender, RoutedEventArgs e)
         {
-            
             try
             {
                 DatabaseUse database = new DatabaseUse("MySQL");
-
-
-                Window mainWindow = Window.GetWindow(this);
-
-                if (mainWindow != null)
-                {
-                    // Fermez la fenêtre actuelle (PopUpBDD).
-                    ChooseGame chooseGameView = new ChooseGame(database);
-                    mainWindow.Content = chooseGameView;
-                }
-                else
-                {
-                    MessageBox.Show("MainWindow null");
-                }
-
-
+                ChangeView(database);
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show($"Erreur à la connexion a la BDD MySQL: {ex}");
-                // Gérer les erreurs de connexion à la base de données ici.
-            }
-
-            
+            }            
         }
 
         private void MongoDB_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                DatabaseUse database = new DatabaseUse("MongoDB");
+                ChangeView(database);
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Erreur à la connexion a la BDD MongoDB: {ex}");
+            }
         }
 
         private void SQLite_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                DatabaseUse database = new DatabaseUse("SQLite");
+                ChangeView(database);
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Erreur à la connexion a la BDD SQLite: {ex}");
+            }
 
         }
+
+        private void ChangeView(DatabaseUse database)
+        {
+            Window mainWindow = Window.GetWindow(this);
+
+            if (mainWindow != null)
+            {
+                // Fermez la fenêtre actuelle (PopUpBDD).
+                ChoosePlayers choosePlayersView = new ChoosePlayers(database);
+                mainWindow.Content = choosePlayersView;
+            }
+            else
+            {
+                MessageBox.Show("MainWindow null");
+            }
+        }
+
     }
 }

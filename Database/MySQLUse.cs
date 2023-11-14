@@ -67,6 +67,51 @@ namespace Punto.Database
             return players;
         }
 
+        public void AddPlayerToDatabase(Player newPlayer)
+        {
+            string query = "INSERT INTO Player (Name, Color, Wins, lastWins) VALUES (@Name, @Color, @Wins, @lastWins)";
+
+            using (MySqlCommand cmd = new MySqlCommand(query, MySqlConnection))
+            {
+                cmd.Parameters.AddWithValue("@Name", newPlayer.Name);
+                cmd.Parameters.AddWithValue("@Color", newPlayer.Color);
+                cmd.Parameters.AddWithValue("@Wins", newPlayer.Wins);
+                cmd.Parameters.AddWithValue("@lastWins", newPlayer.lastWins);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void UpdatePlayerInDatabase(Player updatedPlayer)
+        {
+            string query = "UPDATE Player SET Name = @Name, Color = @Color, Wins = @Wins, lastWins = @lastWins WHERE Id = @Id";
+
+            using (MySqlCommand cmd = new MySqlCommand(query, MySqlConnection))
+            {
+                cmd.Parameters.AddWithValue("@Id", updatedPlayer.Id);
+                cmd.Parameters.AddWithValue("@Name", updatedPlayer.Name);
+                cmd.Parameters.AddWithValue("@Color", updatedPlayer.Color);
+                cmd.Parameters.AddWithValue("@Wins", updatedPlayer.Wins);
+                cmd.Parameters.AddWithValue("@lastWins", updatedPlayer.lastWins);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
+        public void DeletePlayerFromDatabase(int playerId)
+        {
+            string query = "DELETE FROM Player WHERE Id = @Id";
+
+            using (MySqlCommand cmd = new MySqlCommand(query, MySqlConnection))
+            {
+                cmd.Parameters.AddWithValue("@Id", playerId);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
         public List<Cell> LoadCellsFromDatabase()
         {
             List<Cell> cases = new List<Cell>();

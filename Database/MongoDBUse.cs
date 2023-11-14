@@ -22,7 +22,7 @@ namespace Punto.Database
         {
             try
             {
-                MongoClient client = new MongoClient();
+                MongoClient client = new MongoClient("mongodb://localhost:27017");
                 _database = client.GetDatabase("PuntoDatabase");
             }
             catch (Exception e)
@@ -38,21 +38,21 @@ namespace Punto.Database
             games = LoadGamesFromDatabase();
         }
 
-        private List<Player> LoadPlayersFromDatabase()
+        public List<Player> LoadPlayersFromDatabase()
         {
             var collection = _database.GetCollection<Player>("Player");
             var filter = Builders<Player>.Filter.Empty;
             return collection.Find(filter).ToList();
         }
 
-        private List<Cell> LoadCellsFromDatabase()
+        public List<Cell> LoadCellsFromDatabase()
         {
             var collection = _database.GetCollection<Cell>("Cells");
             var filter = Builders<Cell>.Filter.Empty;
             return collection.Find(filter).ToList();
         }
 
-        private List<Game> LoadGamesFromDatabase()
+        public List<Game> LoadGamesFromDatabase()
         {
             var collection = _database.GetCollection<Game>("Game");
             var filter = Builders<Game>.Filter.Empty;

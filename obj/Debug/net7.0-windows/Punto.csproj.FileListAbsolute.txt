@@ -84,14 +84,12 @@ C:\Users\mariu\Documents\clone-git\PuntoGames\bin\Debug\net7.0-windows\runtimes\
 C:\Users\mariu\Documents\clone-git\PuntoGames\bin\Debug\net7.0-windows\runtimes\win-x64\native\krb5_64.dll
 C:\Users\mariu\Documents\clone-git\PuntoGames\bin\Debug\net7.0-windows\runtimes\win-x64\native\krbcc64.dll
 C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\Punto.csproj.AssemblyReference.cache
-C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\ChooseGame.g.cs
 C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\GameView.g.cs
 C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\MainWindow.g.cs
 C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\PopUpBDD.g.cs
 C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\App.g.cs
 C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\Punto_MarkupCompile.cache
 C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\Punto_MarkupCompile.lref
-C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\ChooseGame.baml
 C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\GameView.baml
 C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\MainWindow.baml
 C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\PopUpBDD.baml
@@ -106,3 +104,7 @@ C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\refint\Pu
 C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\Punto.pdb
 C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\Punto.genruntimeconfig.cache
 C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\ref\Punto.dll
+C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\ChoosePlayers.g.cs
+C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\ChoosePlayers.baml
+C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\ManagePlayer.g.cs
+C:\Users\mariu\Documents\clone-git\PuntoGames\obj\Debug\net7.0-windows\ManagePlayer.baml

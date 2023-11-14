@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 C:\Users\mariu\Documents\clone-git\PuntoGames\App.xaml
-4-1659992484
+5-1056358530
 
-131356466839
+14454759982
 2161438081175
-ChooseGame.xaml;GameView.xaml;MainWindow.xaml;PopUpBDD.xaml;
+ChoosePlayers.xaml;GameView.xaml;MainWindow.xaml;ManagePlayer.xaml;PopUpBDD.xaml;
 
 True
 

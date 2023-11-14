@@ -12,6 +12,7 @@ namespace Punto.Database
         public string Name { get; set; }
         public string Color { get; set; }
         public int Wins { get; set; }
+        public DateOnly LastWin { get; set; }
     }
 
     public class Cell

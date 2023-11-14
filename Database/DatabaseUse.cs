@@ -12,7 +12,8 @@ namespace Punto
 {
     public class DatabaseUse
     {
-        public MySqlConnection MySqlConnection;
+        private MySQLUse mySQLUse;
+        private MongoDBUse mongoDBUse;
 
         private IMongoDatabase _database;
 
@@ -31,10 +32,8 @@ namespace Punto
             {
                 try
                 {
-                    MySQLUse mySQLUse = new MySQLUse();
-                    players = mySQLUse.LoadPlayersFromDatabase();
-                    //cells = mySQLUse.LoadCellsFromDatabase();
-                    games = mySQLUse.LoadGamesFromDatabase();
+                    mySQLUse = new MySQLUse();
+                    LoadDatas();
                 }
                 catch (Exception e){
                     MessageBox.Show($"Erreur connexion à la base de données MySQL : {e}");
@@ -45,8 +44,9 @@ namespace Punto
             {
                 try
                 {
-                    MongoClient client = new MongoClient("mongodb://localhost:27017");
-                    this._database = client.GetDatabase("PuntoDatabase");
+                    mongoDBUse = new MongoDBUse();
+                    players = mongoDBUse.LoadPlayersFromDatabase();
+
                 }
                 catch (Exception e)
                 {
@@ -66,10 +66,58 @@ namespace Punto
 
         }
 
+        public void LoadDatas()
+        {
+            players = mySQLUse.LoadPlayersFromDatabase();
+            //cells = mySQLUse.LoadCellsFromDatabase();
+            games = mySQLUse.LoadGamesFromDatabase();
+        }
+
 
         public List<Player> GetPlayers() { return players; }
         public List<Cell> GetCells() { return cells; }
         public List<Game> GetGames() { return games; }
+
+
+        public void DeletePlayer(Player player)
+        {
+            players.Remove(player);
+            if(databaseTechno == "MySQL" && mySQLUse != null)
+            {
+                this.mySQLUse.DeletePlayerFromDatabase(player.Id);
+            }else if(databaseTechno == "MongoDB" && mongoDBUse != null)
+            {
+
+            }
+
+        }
+
+        public void ModifyPlayer(Player player)
+        {
+            if (databaseTechno == "MySQL" && mySQLUse != null)
+            {
+                this.mySQLUse.UpdatePlayerInDatabase(player);
+            }
+            else if (databaseTechno == "MongoDB" && mongoDBUse != null)
+            {
+
+            }
+        }
+
+
+        public void AddPlayer(Player player)
+        {
+            if (databaseTechno == "MySQL" && mySQLUse != null)
+            {
+                this.mySQLUse.AddPlayerToDatabase(player);
+            }
+            else if (databaseTechno == "MongoDB" && mongoDBUse != null)
+            {
+
+            }
+
+        }
+
 
 
 

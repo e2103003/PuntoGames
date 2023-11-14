@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="Punto.ChoosePlayers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Punto"
+             mc:Ignorable="d" >
+    <Grid>
+        <TextBlock Text="Choix de la partie : " VerticalAlignment="Top"  HorizontalAlignment="Center" FontSize="30" Background="White"/>
+        <ScrollViewer Margin="0,50,0,0" >
+            <StackPanel  Orientation="Vertical">
+
+
+
+
+
+                <!-- Liste des joueurs -->
+                <ItemsControl ItemsSource="{Binding Players}" Width="520"  >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate >
+                            <Border BorderBrush="{Binding Color}" BorderThickness="1" Margin="5" Padding="10" Height="130" Width="250">
+                                <StackPanel HorizontalAlignment="Center" >
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Text="Couleur : "/>
+                                        <TextBlock Text="{Binding Color}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Text="Nombre de wins : "/>
+                                        <TextBlock Text="{Binding Wins}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Text="Dernière win : "/>
+                                        <TextBlock Text="{Binding LastWin}"/>
+                                    </StackPanel>
+                                    <Button Content="Choisir" Height="30" Width="70" Margin="0,5"  VerticalAlignment="Bottom"  HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Border BorderBrush="Black" BorderThickness="1" Margin="5" Padding="5" Height="75" Width="190">
+                    <StackPanel HorizontalAlignment="Center" >
+                        <TextBlock Text="Ajouter un joueur" FontWeight="Bold" />
+
+                        <Button Content="Ajouter" Height="30" Width="70" Margin="0,5"  VerticalAlignment="Bottom"  HorizontalAlignment="Center" Click="ButtonAjouter_Click" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>
