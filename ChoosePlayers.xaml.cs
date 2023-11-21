@@ -34,5 +34,13 @@ namespace Punto
             this.Content = managePlayer;
 
         }
+
+        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Player player = (Player)((Button)sender).Tag;
+            ManagePlayer managePlayer = new ManagePlayer(player, database);
+            this.Content = managePlayer;
+
+        }
     }
 }

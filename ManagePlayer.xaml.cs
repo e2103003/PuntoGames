@@ -34,8 +34,14 @@ namespace Punto
 
                 inputId.Text = player.Id.ToString();
                 inputName.Text = player.Name;
-                inputColor.ItemsSource = player.Color;
-                inputColor.SelectedIndex = 0;
+                foreach (ListBoxItem item in inputColor.Items)
+                {
+                    if (item.Content.ToString() == player.Color)
+                    {
+                        item.IsSelected = true;
+                        break;
+                    }
+                }
 
                 titre.Text = "Modifier un joueur : ";
                 btnSupprimer.IsEnabled = true;  
@@ -48,6 +54,8 @@ namespace Punto
         {
             if(this.player != null)
             {
+                this.player.Name = inputName.Text;
+                this.player.Color = ((ListBoxItem)inputColor.SelectedItem).Content.ToString();
                 database.ModifyPlayer(this.player);
             }
             else
@@ -73,6 +81,8 @@ namespace Punto
         private void BtnSupprimer_Click(object sender, RoutedEventArgs e)
         {
             database.DeletePlayer(this.player);
+            ChoosePlayers choosePlayers = new ChoosePlayers(database);
+            this.Content = choosePlayers;
         }
     }
 }

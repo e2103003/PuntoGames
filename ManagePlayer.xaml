@@ -45,7 +45,7 @@
 
             <Button Content="Valider" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Width="100" Height="40" FontSize="15" Click="BtnValider_Click" Background="White" Foreground="Blue" BorderBrush="Blue" />
 
-            <Button x:Name="btnSupprimer" Content="Supprimer" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Width="100" Height="40" FontSize="15" Background="White" Foreground="Gray" BorderBrush="Red" IsEnabled="False" Click="BtnSupprimer_Click" />
+            <Button x:Name="btnSupprimer" Content="Supprimer" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Width="100" Height="40" FontSize="15" Background="White" Foreground="Gray" BorderBrush="Red" IsEnabled="False" Click="BtnSupprimer_Click" />
 
 
 
