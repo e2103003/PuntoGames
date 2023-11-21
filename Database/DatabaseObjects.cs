@@ -32,4 +32,11 @@ namespace Punto.Database
         public String Cells { get; set; }
     }
 
+    // Pas stocker dans les base de données
+    public class Card
+    {
+        public string Color { get; set; }
+        public int Number { get; set; }
+    }
+
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Punto.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,11 +29,16 @@ namespace Punto
 
         private void ShowPopUpBDD()
         {
-            // Créez une instance de votre UserControl.
-            var popUpBDD = new PopUpBDD();
+            // Affichaeg de la première vue - le choix de la base de données
+            //PopUpBDD popUpBDD = new PopUpBDD();
+
+            List<Player> players = new List<Player>();
+
+            GameView gameView = new GameView(players);
+
 
             // Affichez le UserControl dans la fenêtre principale.
-            this.Content = popUpBDD;
+            this.Content = gameView;
         }
     }
 }

@@ -9,43 +9,38 @@
       Background="white">
 
     <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="*"/>
+            
 
-            </Grid.RowDefinitions>
+        <TextBlock Text="GRILLE :" FontSize="40" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"/>
 
-            <TextBlock Text="GRILLE :" FontSize="40" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"/>
+        <Border Margin="60,60" BorderBrush="Black" BorderThickness="2">
 
-        <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="2">
-
-            <Grid Grid.Column="1" Grid.Row="1" Background="Gray">
-                <Grid.ColumnDefinitions >
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <DataGrid ItemsSource="{Binding Grid}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Column" Width="*" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="11" Rows="1" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border BorderBrush="Black" BorderThickness="1" Width="50" Height="50" Background="{Binding Color}">
+                                                <TextBlock Text="{Binding Number}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
 
 
-
-            </Grid>
         </Border>
 
 
