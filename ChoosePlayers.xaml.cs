@@ -23,7 +23,7 @@ namespace Punto
             database.LoadDatas();
 
             // Initialisez vos listes de jeux et de joueurs
-            Games = new ObservableCollection<Game>(database.GetGames());
+            //Games = new ObservableCollection<Game>(database.GetGames());
             Players = new ObservableCollection<Player>(database.GetPlayers());
 
         }

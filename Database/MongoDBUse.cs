@@ -1,6 +1,8 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +15,12 @@ namespace Punto.Database
 
         private IMongoDatabase _database;
 
-        List<Player> players;
-        List<Cell> cells;
-        List<Game> games;
+        private IMongoCollection<Player> _playersCollection;
+        private IMongoCollection<Cell> _cellsCollection;
+        private IMongoCollection<Game> _gamesCollection;
+
+        private IMongoCollection<BsonDocument> _countersCollection;
+
 
 
         public MongoDBUse()
@@ -24,6 +29,7 @@ namespace Punto.Database
             {
                 MongoClient client = new MongoClient("mongodb://localhost:27017");
                 _database = client.GetDatabase("PuntoDatabase");
+                LoadData();
             }
             catch (Exception e)
             {
@@ -33,9 +39,10 @@ namespace Punto.Database
 
         private void LoadData()
         {
-            players = LoadPlayersFromDatabase();
-            cells = LoadCellsFromDatabase();
-            games = LoadGamesFromDatabase();
+            _playersCollection = _database.GetCollection<Player>("Player");
+            _cellsCollection = _database.GetCollection<Cell>("Cell");
+            _gamesCollection = _database.GetCollection<Game>("Game");
+            _countersCollection = _database.GetCollection<BsonDocument>("Counters");
         }
 
         public List<Player> LoadPlayersFromDatabase()
@@ -60,16 +67,50 @@ namespace Punto.Database
         }
 
 
-        public List<Player> GetPlayers() { return players; }
-        public void SetPlayers(List<Player> players) { this.players = players; }
+        // Ajouter un joueur dans la collection "Player"
+        public void AddPlayerToDatabase(Player newPlayer)
+        {
+            newPlayer.Id = GetNextPlayerId();
+            _playersCollection.InsertOne(newPlayer);
+        }
 
 
-        public List<Cell> GetCells() { return cells; }        
-        public void SetCells(List<Cell> cells) { this.cells = cells;  }
+        private int GetNextPlayerId()
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", "playerId");
+            var update = Builders<BsonDocument>.Update.Inc("seq", 1);
 
-        public List<Game> GetGames() { return games; }
+            var options = new FindOneAndUpdateOptions<BsonDocument>
+            {
+                ReturnDocument = ReturnDocument.After,
+                IsUpsert = true
+            };
 
-        public void SetGames(List<Game> games) { this.games = games;  }
+            var result = _countersCollection.FindOneAndUpdate(filter, update, options);
+
+            return result["seq"].AsInt32;
+        }
+
+
+
+        // Mettre à jour les informations d'un joueur dans la collection "Player"
+        public void UpdatePlayerInDatabase(Player updatedPlayer)
+        {
+            var filter = Builders<Player>.Filter.Eq(p => p.Id, updatedPlayer.Id);
+            var update = Builders<Player>.Update
+                .Set(p => p.Name, updatedPlayer.Name)
+                .Set(p => p.Color, updatedPlayer.Color)
+                .Set(p => p.Wins, updatedPlayer.Wins);
+
+            _playersCollection.UpdateOne(filter, update);
+        }
+
+        // Supprimer un joueur de la collection "Player"
+        public void DeletePlayerFromDatabase(int playerId)
+        {
+            var filter = Builders<Player>.Filter.Eq(p => p.Id, playerId);
+            _playersCollection.DeleteOne(filter);
+        }
 
     }
 }

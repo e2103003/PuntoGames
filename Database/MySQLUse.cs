@@ -76,7 +76,7 @@ namespace Punto.Database
                 cmd.Parameters.AddWithValue("@Name", newPlayer.Name);
                 cmd.Parameters.AddWithValue("@Color", newPlayer.Color);
                 cmd.Parameters.AddWithValue("@Wins", newPlayer.Wins);
-                cmd.Parameters.AddWithValue("@lastWins", newPlayer.lastWins);
+                cmd.Parameters.AddWithValue("@lastWins", newPlayer.LastWin);
 
                 cmd.ExecuteNonQuery();
             }
@@ -92,7 +92,7 @@ namespace Punto.Database
                 cmd.Parameters.AddWithValue("@Name", updatedPlayer.Name);
                 cmd.Parameters.AddWithValue("@Color", updatedPlayer.Color);
                 cmd.Parameters.AddWithValue("@Wins", updatedPlayer.Wins);
-                cmd.Parameters.AddWithValue("@lastWins", updatedPlayer.lastWins);
+                cmd.Parameters.AddWithValue("@lastWins", updatedPlayer.LastWin);
 
                 cmd.ExecuteNonQuery();
             }

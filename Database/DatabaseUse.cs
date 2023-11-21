@@ -4,6 +4,7 @@ using Punto.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,9 +14,13 @@ namespace Punto
     public class DatabaseUse
     {
         private MySQLUse mySQLUse;
-        private MongoDBUse mongoDBUse;
-
         private IMongoDatabase _database;
+
+
+        private MongoDBUse mongoDBUse;
+        private SQLiteUse sqliteUse;
+
+       
 
         public string databaseTechno;
 
@@ -45,8 +50,8 @@ namespace Punto
                 try
                 {
                     mongoDBUse = new MongoDBUse();
-                    players = mongoDBUse.LoadPlayersFromDatabase();
-
+                    LoadDatas();
+                    
                 }
                 catch (Exception e)
                 {
@@ -56,7 +61,8 @@ namespace Punto
             }
             else if(databaseTechno == "SQLite")
             {
-
+                sqliteUse = new SQLiteUse();
+                LoadDatas();
             }
             else
             {
@@ -68,9 +74,30 @@ namespace Punto
 
         public void LoadDatas()
         {
-            players = mySQLUse.LoadPlayersFromDatabase();
-            //cells = mySQLUse.LoadCellsFromDatabase();
-            games = mySQLUse.LoadGamesFromDatabase();
+            if (databaseTechno == "MySQL" && mySQLUse != null)
+            {
+                players = mySQLUse.LoadPlayersFromDatabase();
+                //cells = mySQLUse.LoadCellsFromDatabase();
+                games = mySQLUse.LoadGamesFromDatabase();
+            }
+            else if (databaseTechno == "MongoDB" && mongoDBUse != null)
+            {
+                players = mongoDBUse.LoadPlayersFromDatabase();
+                //cells = mongoDBUse.LoadCellsFromDatabase();
+                games = mongoDBUse.LoadGamesFromDatabase();
+            }
+            else if (databaseTechno == "SQLite" && sqliteUse != null)
+            {
+                
+                players = sqliteUse.LoadPlayersFromDatabase();
+                ////cells = sqliteUse.LoadCellsFromDatabase();
+                //games = sqliteUse.LoadGamesFromDatabase();
+            }
+            else
+            {
+                MessageBox.Show("Erreur technologie de base de données introuvable ou null : " + databaseTechno);
+            }
+
         }
 
 
@@ -84,10 +111,19 @@ namespace Punto
             players.Remove(player);
             if(databaseTechno == "MySQL" && mySQLUse != null)
             {
-                this.mySQLUse.DeletePlayerFromDatabase(player.Id);
-            }else if(databaseTechno == "MongoDB" && mongoDBUse != null)
+                mySQLUse.DeletePlayerFromDatabase(player.Id);
+            }
+            else if(databaseTechno == "MongoDB" && mongoDBUse != null)
             {
-
+                mongoDBUse.DeletePlayerFromDatabase(player.Id);
+            } 
+            else if(databaseTechno == "SQLite" && sqliteUse != null)
+            {
+                sqliteUse.DeletePlayerFromDatabase(player.Id);
+            }
+            else
+            {
+                MessageBox.Show("Erreur technologie de base de données introuvable ou null : " + databaseTechno);
             }
 
         }
@@ -96,11 +132,19 @@ namespace Punto
         {
             if (databaseTechno == "MySQL" && mySQLUse != null)
             {
-                this.mySQLUse.UpdatePlayerInDatabase(player);
+                mySQLUse.UpdatePlayerInDatabase(player);
             }
             else if (databaseTechno == "MongoDB" && mongoDBUse != null)
             {
-
+                mongoDBUse.UpdatePlayerInDatabase(player);
+            }
+            else if (databaseTechno == "SQLite" && sqliteUse != null)
+            {
+                sqliteUse.UpdatePlayerInDatabase(player);
+            }
+            else
+            {
+                MessageBox.Show("Erreur technologie de base de données introuvable ou null : " + databaseTechno);
             }
         }
 
@@ -109,11 +153,19 @@ namespace Punto
         {
             if (databaseTechno == "MySQL" && mySQLUse != null)
             {
-                this.mySQLUse.AddPlayerToDatabase(player);
+                mySQLUse.AddPlayerToDatabase(player);
             }
             else if (databaseTechno == "MongoDB" && mongoDBUse != null)
             {
-
+                mongoDBUse.AddPlayerToDatabase(player);
+            }
+            else if (databaseTechno == "SQLite" && sqliteUse != null)
+            {
+                sqliteUse.AddPlayerToDatabase(player);
+            }
+            else
+            {
+                MessageBox.Show("Erreur technologie de base de données introuvable ou null : " + databaseTechno);
             }
 
         }
