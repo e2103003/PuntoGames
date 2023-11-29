@@ -11,7 +11,6 @@ namespace Punto
     public partial class ChoosePlayers : UserControl
     {
         private DatabaseUse database;
-        public ObservableCollection<Game> Games { get; set; }
         public ObservableCollection<Player> Players { get; set; }
 
         public ChoosePlayers(DatabaseUse database)
