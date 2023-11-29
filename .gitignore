@@ -87,3 +87,4 @@ ehthumbs.db
 # Ignorer les fichiers de sauvegarde Windows
 $RECYCLE.BIN/
 Desktop.ini
+*.dll
