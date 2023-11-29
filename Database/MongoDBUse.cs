@@ -72,6 +72,7 @@ namespace Punto.Database
         {
             newPlayer.Id = GetNextPlayerId();
             _playersCollection.InsertOne(newPlayer);
+            var test = 1;
         }
 
 

@@ -8,7 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="img\back.png" />
     <None Remove="img\edit.png" />
+    <None Remove="img\logo_mongodb.png" />
+    <None Remove="img\logo_mysql.png" />
+    <None Remove="img\logo_sqlite.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,7 +26,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="img\back.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\edit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\logo_mongodb.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\logo_mysql.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\logo_sqlite.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

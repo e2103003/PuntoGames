@@ -30,7 +30,7 @@ namespace Punto
         private void ShowPopUpBDD()
         {
             // Affichaeg de la première vue - le choix de la base de données
-            //PopUpBDD popUpBDD = new PopUpBDD();
+            PopUpBDD popUpBDD = new PopUpBDD();
 
             List<Player> players = new List<Player>();
 

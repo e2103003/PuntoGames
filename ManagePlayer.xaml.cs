@@ -26,6 +26,7 @@ namespace Punto
         public ManagePlayer(Player player, DatabaseUse database)
         {
             InitializeComponent();
+
             this.database = database;
 
             if (player != null)
@@ -50,22 +51,29 @@ namespace Punto
             }
         }
 
+       
         private void BtnValider_Click(object sender, RoutedEventArgs e)
         {
-            if(this.player != null)
+            
+            if (this.player != null)
             {
                 this.player.Name = inputName.Text;
                 this.player.Color = ((ListBoxItem)inputColor.SelectedItem).Content.ToString();
                 database.ModifyPlayer(this.player);
+                ChoosePlayers choosePlayers = new ChoosePlayers(database);
+                this.Content = choosePlayers;
+
             }
             else
             {
-                if(inputName.Text != "" && inputColor.SelectedItem != null )
+                if(inputName.Text != "" && inputColor.SelectedItem != null )    
                 {
                     Player newPlayer = new Player();
                     newPlayer.Name = inputName.Text;
                     newPlayer.Color = ((ListBoxItem)inputColor.SelectedItem).Content.ToString();
                     database.AddPlayer(newPlayer);
+                    ChoosePlayers choosePlayers = new ChoosePlayers(database);
+                    this.Content = choosePlayers;
 
                 }
                 else
@@ -74,8 +82,7 @@ namespace Punto
                 }
                 
             }
-            ChoosePlayers choosePlayers = new ChoosePlayers(database);
-            this.Content = choosePlayers;
+            
         }
 
         private void BtnSupprimer_Click(object sender, RoutedEventArgs e)
@@ -84,5 +91,14 @@ namespace Punto
             ChoosePlayers choosePlayers = new ChoosePlayers(database);
             this.Content = choosePlayers;
         }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            ChoosePlayers choosePlayers = new ChoosePlayers(database);
+            this.Content = choosePlayers;
+        }
+
+
+
     }
 }

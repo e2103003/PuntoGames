@@ -26,6 +26,9 @@ namespace Punto
 
         private List<List<Card>> bord;
 
+
+
+
         public GameView(List<Player> players)
         //public GameView()
         {
@@ -36,35 +39,79 @@ namespace Punto
             int nombreLignes = 11;
             int nombreColonnes = 11;
 
-            // Initialisation de la liste de listes
-            for (int i = 0; i < nombreLignes; i++)
+
+
+            // Initialisation de grille de jeu
+            for (int i = 0; i < nombreLignes; ++i)
             {
-                List<Card> ligne = new List<Card>();
-
-                for (int j = 0; j < nombreColonnes; j++)
+                bord.Add(new List<Card>());
+                for (int j = 0; j < nombreColonnes; ++j)
                 {
-                    // Initialiser chaque élément à null
-                    ligne.Add(null);
+                    bord[i].Add(null);
                 }
-
-                bord.Add(ligne);
             }
+
 
             Card card = new Card();
             card.Color = "Blue";
             card.Number = 6;
-            bord[3][4] = card;
+            bord[1][2] = card;
+
+            card = new Card();
+            card.Color = "Red";
+            card.Number = 3;
+            bord[0][2] = card;
 
 
-            gameGridViewModel = new GameGridViewModel();
+            card = new Card();
+            card.Color = "Yellow";
+            card.Number = 9;
+            bord[10][7] = card;
+
+
             UpdateGrid();
+
+
+
+            
             DataContext = gameGridViewModel;
         }
 
         // Vous pouvez appeler cette méthode pour mettre à jour la grille visuelle
         public void UpdateGrid()
         {
-            gameGridViewModel.UpdateGrid(bord);
+            for (int i = 0; i < bord[0].Count; ++i)
+            {
+                for (int j = 0; j < bord.Count; ++j)
+                {
+                    Button b = new Button();
+
+                    if (bord[i][j] != null)
+                    {
+                        b.Content = bord[i][j].Number;
+                        b.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(bord[i][j].Color));
+                    }
+                    else
+                    {
+                        b.Content = "";
+                        b.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Black"));
+                    }
+
+                    b.BorderThickness = new Thickness(2);
+                    b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
+                    b.Click += new RoutedEventHandler(Button_Click);
+                    Grid.SetRow(b, i);
+                    Grid.SetColumn(b, j);
+                    BoardGrid.Children.Add(b);
+
+                }
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
-}
+
+    }

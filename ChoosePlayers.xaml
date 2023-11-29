@@ -6,13 +6,12 @@
              xmlns:local="clr-namespace:Punto"
              mc:Ignorable="d" >
     <Grid>
+        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Click="ButtonBack_Click" IsCancel="True" Background="Transparent" BorderThickness="0">
+            <Image Source="img/back.png" Height="50" />
+        </Button>
         <TextBlock Text="Choix de la partie : " VerticalAlignment="Top"  HorizontalAlignment="Center" FontSize="30" Background="White"/>
         <ScrollViewer Margin="0,50,0,0" >
             <StackPanel  Orientation="Vertical">
-
-
-
-
 
                 <!-- Liste des joueurs -->
                 <ItemsControl ItemsSource="{Binding Players}" Width="520"  >

@@ -42,5 +42,12 @@ namespace Punto
             this.Content = managePlayer;
 
         }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            PopUpBDD popUpBDD = new PopUpBDD();
+            this.Content = popUpBDD;
+
+        }
     }
 }

@@ -8,31 +8,38 @@
              d:DesignHeight="450" d:DesignWidth="800" Background="White">
     <Border BorderThickness="2" BorderBrush="Black">
 
-        <Grid Margin="200,50" HorizontalAlignment="Center">
+        
+        <Grid >
+           
+
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
 
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="2" x:Name="titre" Text="Ajouter un joueur : " FontSize="25" HorizontalAlignment="Right" FontWeight="Black"/>
+            <Button VerticalAlignment="Top" HorizontalAlignment="Left" Click="ButtonBack_Click" IsCancel="True" Background="Transparent" BorderThickness="0">
+                <Image Source="img/back.png" Height="50" />
+            </Button>
 
-            <TextBlock Grid.Row="1" Grid.Column="0"  Text="Id : " FontSize="20" HorizontalAlignment="Right" TextAlignment="Center" Height="30" />
-            <TextBox x:Name="inputId" Grid.Row="1" Grid.Column="1"  IsEnabled="False" FontSize="15" HorizontalAlignment="Center" Width="150" Height="30" Text="Automatique"  />
+            <TextBlock Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="2" x:Name="titre" Text="Ajouter un joueur : " FontSize="45" HorizontalAlignment="Center" FontWeight="Black"/>
 
-            <TextBlock Grid.Row="2" Grid.Column="0"  Text="Name : " FontSize="20" HorizontalAlignment="Right"  TextAlignment="Center" Height="30" />
-            <TextBox x:Name="inputName" Grid.Row="2" Grid.Column="1"   FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="30"  />
+            <TextBlock Grid.Row="1" Grid.Column="0"  Text="Id : " FontSize="30" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBox x:Name="inputId" Grid.Row="1" Grid.Column="1"  IsEnabled="False" FontSize="20" HorizontalAlignment="Left"  Width="150" Height="30" Text="Automatique"  />
 
-            <TextBlock Grid.Row="3" Grid.Column="0"  Text="Couleur : " FontSize="20" HorizontalAlignment="Right" TextAlignment="Center" Height="30" />
-            <ListBox x:Name="inputColor" Grid.Row="3" Grid.Column="1" FontSize="15" HorizontalAlignment="Center" Width="150" >
+            <TextBlock Grid.Row="2" Grid.Column="0"  Text="Name : " FontSize="30" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBox x:Name="inputName" Grid.Row="2" Grid.Column="1"   FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Height="30"  />
+
+            <TextBlock Grid.Row="3" Grid.Column="0"  Text="Couleur : " FontSize="30" HorizontalAlignment="Right" VerticalAlignment="Top" />
+            <ListBox x:Name="inputColor" Grid.Row="3" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="150" >
                 <ListBoxItem Foreground="Blue" BorderBrush="Black" Content="Blue"/>
                 <ListBoxItem Foreground="Orange" BorderBrush="Black" Content="Orange"/>
                 <ListBoxItem Foreground="Green" BorderBrush="Black" Content="Green"/>
@@ -43,9 +50,9 @@
 
 
 
-            <Button Content="Valider" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Width="100" Height="40" FontSize="15" Click="BtnValider_Click" Background="White" Foreground="Blue" BorderBrush="Blue" />
+            <Button Content="Valider" Margin="15,0"  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Width="150" Height="60" FontSize="25" Click="BtnValider_Click" Background="White" Foreground="Blue" BorderBrush="Blue" />
 
-            <Button x:Name="btnSupprimer" Content="Supprimer" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Width="100" Height="40" FontSize="15" Background="White" Foreground="Gray" BorderBrush="Red" IsEnabled="False" Click="BtnSupprimer_Click" />
+            <Button x:Name="btnSupprimer" Content="Supprimer" Margin="15,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Width="150" Height="60" FontSize="25" Background="White" Foreground="Gray" BorderBrush="Red" IsEnabled="False" Click="BtnSupprimer_Click" />
 
 
 

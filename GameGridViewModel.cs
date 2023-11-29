@@ -11,8 +11,8 @@ namespace Punto
 {
     public class GameGridViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<ObservableCollection<CardViewModel>> grid;
-        public ObservableCollection<ObservableCollection<CardViewModel>> Grid
+        private GameGrid grid;
+        public GameGrid Grid
         {
             get { return grid; }
             set
@@ -22,25 +22,9 @@ namespace Punto
             }
         }
 
-        public GameGridViewModel()
+        public GameGridViewModel(int rows, int columns)
         {
-            InitializeGrid();
-        }
-
-        private void InitializeGrid()
-        {
-            // Initialisez la grille avec des lignes et des colonnes vides
-            Grid = new ObservableCollection<ObservableCollection<CardViewModel>>();
-
-            for (int i = 0; i < 11; i++)
-            {
-                var row = new ObservableCollection<CardViewModel>();
-                for (int j = 0; j < 11; j++)
-                {
-                    row.Add(new CardViewModel());
-                }
-                Grid.Add(row);
-            }
+            Grid = new GameGrid(rows, columns);
         }
 
         // Vous pouvez appeler cette méthode pour mettre à jour visuellement la grille
@@ -69,5 +53,6 @@ namespace Punto
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+
 
 }
