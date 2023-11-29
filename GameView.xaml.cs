@@ -22,7 +22,6 @@ namespace Punto
     public partial class GameView : UserControl
     {
 
-        private GameGridViewModel gameGridViewModel;
 
         private List<List<Card>> bord;
 
@@ -72,9 +71,6 @@ namespace Punto
             UpdateGrid();
 
 
-
-            
-            DataContext = gameGridViewModel;
         }
 
         // Vous pouvez appeler cette méthode pour mettre à jour la grille visuelle
@@ -86,6 +82,9 @@ namespace Punto
                 {
                     Button b = new Button();
 
+                    
+                    
+
                     if (bord[i][j] != null)
                     {
                         b.Content = bord[i][j].Number;
@@ -94,12 +93,15 @@ namespace Punto
                     else
                     {
                         b.Content = "";
-                        b.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Black"));
+                        b.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
                     }
+                    b.Height = 47;
+                    b.Width = 47;
 
-                    b.BorderThickness = new Thickness(2);
+                    b.BorderThickness = new Thickness(3.5);
                     b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
                     b.Click += new RoutedEventHandler(Button_Click);
+                    // modifie la couleur de la couleur du boutton pendant le survol de la souris
                     Grid.SetRow(b, i);
                     Grid.SetColumn(b, j);
                     BoardGrid.Children.Add(b);

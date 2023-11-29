@@ -76,8 +76,6 @@ namespace Punto.Database
 
 
         List<Player> players;
-        List<Cell> cells;
-        List<Game> games;
 
         public List<Player> LoadPlayersFromDatabase()
         {

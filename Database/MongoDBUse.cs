@@ -16,8 +16,6 @@ namespace Punto.Database
         private IMongoDatabase _database;
 
         private IMongoCollection<Player> _playersCollection;
-        private IMongoCollection<Cell> _cellsCollection;
-        private IMongoCollection<Game> _gamesCollection;
 
         private IMongoCollection<BsonDocument> _countersCollection;
 
@@ -40,8 +38,6 @@ namespace Punto.Database
         private void LoadData()
         {
             _playersCollection = _database.GetCollection<Player>("Player");
-            _cellsCollection = _database.GetCollection<Cell>("Cell");
-            _gamesCollection = _database.GetCollection<Game>("Game");
             _countersCollection = _database.GetCollection<BsonDocument>("Counters");
         }
 
@@ -52,19 +48,7 @@ namespace Punto.Database
             return collection.Find(filter).ToList();
         }
 
-        public List<Cell> LoadCellsFromDatabase()
-        {
-            var collection = _database.GetCollection<Cell>("Cells");
-            var filter = Builders<Cell>.Filter.Empty;
-            return collection.Find(filter).ToList();
-        }
 
-        public List<Game> LoadGamesFromDatabase()
-        {
-            var collection = _database.GetCollection<Game>("Game");
-            var filter = Builders<Game>.Filter.Empty;
-            return collection.Find(filter).ToList();
-        }
 
 
         // Ajouter un joueur dans la collection "Player"

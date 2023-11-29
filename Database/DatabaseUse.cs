@@ -26,8 +26,6 @@ namespace Punto
 
 
         private List<Player> players;
-        private List<Cell> cells;
-        private List<Game> games;
 
 
         public DatabaseUse(string databaseTechno)
@@ -77,21 +75,15 @@ namespace Punto
             if (databaseTechno == "MySQL" && mySQLUse != null)
             {
                 players = mySQLUse.LoadPlayersFromDatabase();
-                //cells = mySQLUse.LoadCellsFromDatabase();
-                games = mySQLUse.LoadGamesFromDatabase();
             }
             else if (databaseTechno == "MongoDB" && mongoDBUse != null)
             {
                 players = mongoDBUse.LoadPlayersFromDatabase();
-                //cells = mongoDBUse.LoadCellsFromDatabase();
-                games = mongoDBUse.LoadGamesFromDatabase();
             }
             else if (databaseTechno == "SQLite" && sqliteUse != null)
             {
                 
                 players = sqliteUse.LoadPlayersFromDatabase();
-                ////cells = sqliteUse.LoadCellsFromDatabase();
-                //games = sqliteUse.LoadGamesFromDatabase();
             }
             else
             {
@@ -102,8 +94,6 @@ namespace Punto
 
 
         public List<Player> GetPlayers() { return players; }
-        public List<Cell> GetCells() { return cells; }
-        public List<Game> GetGames() { return games; }
 
 
         public void DeletePlayer(Player player)

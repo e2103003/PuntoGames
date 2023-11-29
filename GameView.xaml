@@ -15,19 +15,8 @@
         <TextBlock Text="{Binding Grid[0][2].Number}" FontSize="40"/>
 
         <Border BorderBrush="Black" BorderThickness="2"  HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <UniformGrid x:Name="BoardGrid" Columns="{Binding Grid[0].Count}" Rows="{Binding Grid.Count}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="550" Height="550">
-                <UniformGrid.Resources>
-                    <Style TargetType="{x:Type Button}">
-                        
-                        <Setter Property="BorderThickness" Value="2"/>
-                        <Setter Property="Width" Value="50"/>
-                        <Setter Property="Height" Value="50"/>
-                        <Setter Property="BorderBrush" Value="{Binding Color}" />
-                        <Setter Property="Content" Value="{Binding Number}" />
-
-
-                    </Style>
-                </UniformGrid.Resources>
+            <UniformGrid x:Name="BoardGrid" Columns="{Binding Grid[0].Count}" Rows="{Binding Grid.Count}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="550" Height="550" Background="Black" >
+                
             </UniformGrid>
         </Border>
 
@@ -46,6 +35,8 @@
             </Border>-->
 
         </StackPanel>
+        
+        
         
 
 

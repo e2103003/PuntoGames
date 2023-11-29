@@ -15,28 +15,22 @@ namespace Punto.Database
         public string LastWin { get; set; }
     }
 
-    public class Cell
-    {
-        public int Id { get; set; }
-        public bool IsEmpty { get; set; }
-        public int? PlayerId { get; set; }
-    }
-
-    public class Game
-    {
-        public int Id { get; set; }
-        public int Player1Id { get; set; }
-        public int Player2Id { get; set; }
-        public DateTime Date { get; set; }
-        //public List<String> Cells { get; set; } // Utiliser le type de données approprié pour votre application
-        public String Cells { get; set; }
-    }
-
+  
     // Pas stocker dans les base de données
     public class Card
     {
         public string Color { get; set; }
         public int Number { get; set; }
+    }
+
+    public class Cell
+    {
+        
+        public Card Card { get; set; }
+        public bool IsPlayable { get; set; }
+
+
+        
     }
 
 }
