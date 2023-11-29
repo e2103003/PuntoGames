@@ -45,6 +45,7 @@ namespace Punto
         {
             PopUpBDD popUpBDD = new PopUpBDD();
             this.Content = popUpBDD;
+            var parentWindow = Window.GetWindow(this);
 
         }
     }
