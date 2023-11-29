@@ -30,6 +30,14 @@ bld/
 [Bb]in/
 [Ll]og/
 [Ll]ogs/
+obj/
+[Oo]bj/
+[Tt]emp/
+[Tt]est[Rr]esults/
+[Rr]e[Ss]harper*/
+.vs/
+obj/
+bin/
 
 # Ignore les fichiers de test
 [Tt]est[Rr]esult*/
@@ -55,6 +63,19 @@ _ReSharper*/
 # Ignorer les fichiers temporaires Visual Studio Code
 .vscode/
 .vscode-test/
+
+# Ignorer les fichiers de sauvegarde Visual Studio
+*.[Bb]ak
+
+# Ignorer les fichiers de sauvegarde Visual Studio
+*.vspscc
+*.bin
+*.suo
+*.user
+*.baml
+
+
+
 
 # Ignorer les fichiers d'environnement
 .env
