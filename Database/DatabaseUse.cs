@@ -160,8 +160,34 @@ namespace Punto
 
         }
 
+        public void AddVictory(Player winner)
+        {
+            if(winner.Wins == null)
+            {
+                winner.Wins = 1;
+            } else
+            {
+                winner.Wins++;
+            }
+            winner.LastWin = DateTime.Now.ToString();
 
-
-
+            if (databaseTechno == "MySQL" && mySQLUse != null)
+            {                
+                mySQLUse.AddVictoryToDatabase(winner);
+            }
+            else if (databaseTechno == "MongoDB" && mongoDBUse != null)
+            {
+                mongoDBUse.AddVictoryToDatabase(winner);
+            }
+            else if (databaseTechno == "SQLite" && sqliteUse != null)
+            {
+                sqliteUse.AddVictoryToDatabase(winner);
+            }
+            else
+            {
+                MessageBox.Show("Erreur technologie de base de données introuvable ou null : " + databaseTechno);
+            }
+            
+        }
     }
 }

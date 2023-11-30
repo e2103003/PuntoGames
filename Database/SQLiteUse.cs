@@ -146,6 +146,18 @@ namespace Punto.Database
             }
         }
 
+        public void AddVictoryToDatabase(Player winner)
+        {
+            string query = "UPDATE Player SET wins = @wins, lastWin = @lastWin WHERE id = @id";
 
+            using (SQLiteCommand cmd = new SQLiteCommand(query, database))
+            {
+                cmd.Parameters.AddWithValue("@id", winner.Id);
+                cmd.Parameters.AddWithValue("@wins", winner.Wins);
+                cmd.Parameters.AddWithValue("@lastWin", winner.LastWin);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

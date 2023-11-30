@@ -34,11 +34,12 @@ namespace Punto
 
             List<Player> players = new List<Player>();
 
-            GameView gameView = new GameView(players);
+           // GameView gameView = new GameView(players, null);
 
 
             // Affichez le UserControl dans la fenêtre principale.
-            this.Content = gameView;
+            this.Content = popUpBDD;
+
         }
     }
 }

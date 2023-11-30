@@ -23,17 +23,20 @@ namespace Punto
     {
 
 
-        private List<List<Card>> bord;
+        public List<List<Cell>> bord;
+
+        private Game game;
+
+        private DatabaseUse database;
 
 
-
-
-        public GameView(List<Player> players)
+        public GameView(List<Player> players, DatabaseUse database)
         //public GameView()
         {
+            this.database = database;
             InitializeComponent();
 
-            bord = new List<List<Card>>();
+            bord = new List<List<Cell>>();
 
             int nombreLignes = 11;
             int nombreColonnes = 11;
@@ -43,37 +46,63 @@ namespace Punto
             // Initialisation de grille de jeu
             for (int i = 0; i < nombreLignes; ++i)
             {
-                bord.Add(new List<Card>());
+                bord.Add(new List<Cell>());
                 for (int j = 0; j < nombreColonnes; ++j)
                 {
                     bord[i].Add(null);
+                    
                 }
             }
+
+            // D'après les regles du jeu, la première carte doit être placée au milieu de la grille
+            Cell cellule = new Cell();
+            cellule.IsPlayable = true;
+            bord[5][5] = cellule;
+
 
 
             Card card = new Card();
             card.Color = "Blue";
             card.Number = 6;
-            bord[1][2] = card;
+
+            Cell cell = new Cell();
+            cell.Card = card;
+            cell.IsPlayable = true;
+
+            bord[1][2] = cell;
 
             card = new Card();
             card.Color = "Red";
             card.Number = 3;
-            bord[0][2] = card;
+
+            Cell cell2 = new Cell();
+            cell2.Card = card;
+            cell2.IsPlayable = true;
+            bord[2][3] = cell2;
+
+
 
 
             card = new Card();
             card.Color = "Yellow";
             card.Number = 9;
-            bord[10][7] = card;
+            Cell cell3 = new Cell();
+            cell3.Card = card;
+            cell3.IsPlayable = true;
+            bord[3][4] = cell3;
+
+
+
 
 
             UpdateGrid();
 
+            game = new Game(players, this);
+
 
         }
 
-        // Vous pouvez appeler cette méthode pour mettre à jour la grille visuelle
+        
         public void UpdateGrid()
         {
             for (int i = 0; i < bord[0].Count; ++i)
@@ -82,13 +111,10 @@ namespace Punto
                 {
                     Button b = new Button();
 
-                    
-                    
-
-                    if (bord[i][j] != null)
+                    if (bord[i][j] != null && bord[i][j].Card != null)
                     {
-                        b.Content = bord[i][j].Number;
-                        b.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(bord[i][j].Color));
+                        b.Content = bord[i][j].Card.Number;
+                        b.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(bord[i][j].Card.Color));
                     }
                     else
                     {
@@ -101,13 +127,29 @@ namespace Punto
                     b.BorderThickness = new Thickness(3.5);
                     b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
                     b.Click += new RoutedEventHandler(Button_Click);
-                    // modifie la couleur de la couleur du boutton pendant le survol de la souris
+
+                    // desactiver le bouton si la cellule n'est pas jouable
+                    if (bord[i][j] == null || !bord[i][j].IsPlayable)
+                    {
+                        b.IsEnabled = false;
+                    }
                     Grid.SetRow(b, i);
                     Grid.SetColumn(b, j);
                     BoardGrid.Children.Add(b);
 
                 }
             }
+        }
+
+        internal void EndGame(Player winner)
+        {
+            // on affiche le gagnant
+            MessageBox.Show($"Le gagnant est { winner.Name} !");
+
+            // On enregistre sa victoire dans la base de données
+            database.AddVictory(winner);
+
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -27,7 +27,7 @@
             </Grid.RowDefinitions>
 
             <Button VerticalAlignment="Top" HorizontalAlignment="Left" Click="ButtonBack_Click" IsCancel="True" Background="Transparent" BorderThickness="0">
-                <Image Source="img/back.png" Height="50" />
+                <Image Source="/img/back.png" Height="50" />
             </Button>
 
             <TextBlock Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="2" x:Name="titre" Text="Ajouter un joueur : " FontSize="45" HorizontalAlignment="Center" FontWeight="Black"/>
@@ -54,7 +54,8 @@
 
             <Button x:Name="btnSupprimer" Content="Supprimer" Margin="15,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Width="150" Height="60" FontSize="25" Background="White" Foreground="Gray" BorderBrush="Red" IsEnabled="False" Click="BtnSupprimer_Click" />
 
-
+            <!-- Bouton test de l'insertion d'une victoire -->
+            <Button x:Name="btnTest" Content="Test" Margin="15,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="4" Width="40" Height="40" FontSize="25" Background="White" Foreground="Gray" BorderBrush="Red" Click="BtnTest_Click" />
 
         </Grid>
 

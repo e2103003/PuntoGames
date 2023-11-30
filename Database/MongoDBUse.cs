@@ -56,7 +56,6 @@ namespace Punto.Database
         {
             newPlayer.Id = GetNextPlayerId();
             _playersCollection.InsertOne(newPlayer);
-            var test = 1;
         }
 
 
@@ -85,7 +84,8 @@ namespace Punto.Database
             var update = Builders<Player>.Update
                 .Set(p => p.Name, updatedPlayer.Name)
                 .Set(p => p.Color, updatedPlayer.Color)
-                .Set(p => p.Wins, updatedPlayer.Wins);
+                .Set(p => p.Wins, updatedPlayer.Wins)
+                .Set(p => p.LastWin, updatedPlayer.LastWin);
 
             _playersCollection.UpdateOne(filter, update);
         }
@@ -97,5 +97,14 @@ namespace Punto.Database
             _playersCollection.DeleteOne(filter);
         }
 
+        public void AddVictoryToDatabase(Player winner)
+        {
+            var filter = Builders<Player>.Filter.Eq(p => p.Id, winner.Id);
+            var update = Builders<Player>.Update
+                .Set(p => p.Wins, winner.Wins)
+                .Set(p => p.LastWin, winner.LastWin);
+
+            _playersCollection.UpdateOne(filter, update);
+        }
     }
 }

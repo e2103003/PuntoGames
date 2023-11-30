@@ -53,7 +53,8 @@ namespace Punto.Database
                             Id = reader.GetInt32("id"),
                             Name = reader.GetString("Name"),
                             Color = reader.GetString("Color"),
-                            Wins = reader.GetInt32("Wins")
+                            Wins = reader.GetInt32("Wins"),
+                            LastWin = reader.GetString("LastWin")
                         };
                         players.Add(player);
                     }
@@ -65,14 +66,14 @@ namespace Punto.Database
 
         public void AddPlayerToDatabase(Player newPlayer)
         {
-            string query = "INSERT INTO Player (Name, Color, Wins, lastWins) VALUES (@Name, @Color, @Wins, @lastWins)";
+            string query = "INSERT INTO Player (Name, Color, Wins, LastWin) VALUES (@Name, @Color, @Wins, @LastWin)";
 
             using (MySqlCommand cmd = new MySqlCommand(query, MySqlConnection))
             {
                 cmd.Parameters.AddWithValue("@Name", newPlayer.Name);
                 cmd.Parameters.AddWithValue("@Color", newPlayer.Color);
                 cmd.Parameters.AddWithValue("@Wins", newPlayer.Wins);
-                cmd.Parameters.AddWithValue("@lastWins", newPlayer.LastWin);
+                cmd.Parameters.AddWithValue("@LastWin", newPlayer.LastWin);
 
                 cmd.ExecuteNonQuery();
             }
@@ -80,7 +81,7 @@ namespace Punto.Database
 
         public void UpdatePlayerInDatabase(Player updatedPlayer)
         {
-            string query = "UPDATE Player SET Name = @Name, Color = @Color, Wins = @Wins, lastWins = @lastWins WHERE Id = @Id";
+            string query = "UPDATE Player SET Name = @Name, Color = @Color, Wins = @Wins, LastWin = @LastWin WHERE Id = @Id";
 
             using (MySqlCommand cmd = new MySqlCommand(query, MySqlConnection))
             {
@@ -88,7 +89,7 @@ namespace Punto.Database
                 cmd.Parameters.AddWithValue("@Name", updatedPlayer.Name);
                 cmd.Parameters.AddWithValue("@Color", updatedPlayer.Color);
                 cmd.Parameters.AddWithValue("@Wins", updatedPlayer.Wins);
-                cmd.Parameters.AddWithValue("@lastWins", updatedPlayer.LastWin);
+                cmd.Parameters.AddWithValue("@LastWin", updatedPlayer.LastWin);
 
                 cmd.ExecuteNonQuery();
             }
@@ -107,8 +108,19 @@ namespace Punto.Database
             }
         }
 
+        public void AddVictoryToDatabase(Player winner)
+        {
+            string query = "UPDATE Player SET Wins = @Wins, LastWin = @LastWin WHERE Id = @Id";
 
-        
-        
+            using (MySqlCommand cmd = new MySqlCommand(query, MySqlConnection))
+            {
+                cmd.Parameters.AddWithValue("@Id", winner.Id);
+                cmd.Parameters.AddWithValue("@Wins", winner.Wins);
+                cmd.Parameters.AddWithValue("@LastWin", winner.LastWin);
+
+                cmd.ExecuteNonQuery();
+            }
+            
+        }
     }
 }

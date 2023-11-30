@@ -71,6 +71,9 @@ namespace Punto
                     Player newPlayer = new Player();
                     newPlayer.Name = inputName.Text;
                     newPlayer.Color = ((ListBoxItem)inputColor.SelectedItem).Content.ToString();
+                    newPlayer.Wins = 0;
+                    newPlayer.LastWin = "Pas encore gagné (looser !)";
+
                     database.AddPlayer(newPlayer);
                     ChoosePlayers choosePlayers = new ChoosePlayers(database);
                     this.Content = choosePlayers;
@@ -96,6 +99,13 @@ namespace Punto
         {
             ChoosePlayers choosePlayers = new ChoosePlayers(database);
             this.Content = choosePlayers;
+        }
+
+        private void BtnTest_Click(object sender, RoutedEventArgs e)
+        {
+            // test d'une nouvelle victoire du joueur
+            database.AddVictory(this.player);
+
         }
 
 

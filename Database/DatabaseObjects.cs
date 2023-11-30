@@ -13,6 +13,9 @@ namespace Punto.Database
         public string Color { get; set; }
         public int Wins { get; set; }
         public string LastWin { get; set; }
+
+        public Paquet Paquet { get; set; }
+
     }
 
   
@@ -31,6 +34,22 @@ namespace Punto.Database
 
 
         
+    }
+
+    public class Paquet
+    {
+        public List<Card> Cards { get; set; }
+
+        public Paquet(string color)
+        {
+            Cards = new List<Card>();
+            for (int i = 1; i <= 9; i++)
+            {
+                Cards.Add(new Card() { Color = color, Number = i });
+                Cards.Add(new Card() { Color = color, Number = i });
+            }
+        }
+
     }
 
 }
