@@ -69,7 +69,7 @@ namespace Punto
                     else
                     {
                         b.Content = "";
-                        b.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
+                        b.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Black"));
                     }
                     b.Height = 47;
                     b.Width = 47;
@@ -80,7 +80,7 @@ namespace Punto
                     if (bord[i][j] == null || !bord[i][j].IsPlayable)
                     {
                         b.IsEnabled = true;
-                        b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Black"));
+                        b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
                         b.BorderThickness = new Thickness(0);
                     }
                     else
@@ -97,7 +97,7 @@ namespace Punto
                 }
             }
 
-            CurrentPlayerText.Text = $" C'est à {game.getCurrentPlayer().Name} de jouer sa carte : ";
+            CurrentPlayerText.Text = game.getCurrentPlayer().Name;
 
             NumberCardCurrentPlayerText.Text = $"Il te reste {game.getCurrentPlayer().Paquet.Cards.Count.ToString()} carte(s) dans ton paquet";
 
@@ -158,6 +158,9 @@ namespace Punto
 
             // On enregistre sa victoire dans la base de données
             database.AddVictory(winner);
+
+            // On redémarre une partie
+            restartGame();
 
 
         }
@@ -250,12 +253,19 @@ namespace Punto
             UpdateGrid();
         }
 
+        private void Button_ResetGame(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Voulez-vous vraiment recommencer la partie ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                restartGame();
+            }
+        }
 
-           
 
-        
 
-        
+
+
 
         /// <summary>
         /// Fonction qui regarde si la cellule a une carte adjacente, en haut, en bas, à gauche, à droite ou en diagonale

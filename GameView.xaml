@@ -10,7 +10,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
 
@@ -19,7 +19,7 @@
         <TextBlock Text="{Binding Grid[0][2].Number}" FontSize="40"/>
 
         <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2"  HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <UniformGrid x:Name="BoardGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="550" Height="550" Background="Black" >
+            <UniformGrid x:Name="BoardGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="550" Height="550" >
                 
             </UniformGrid>
         </Border>
@@ -27,17 +27,34 @@
 
 
         <!-- la carte du joueur à jouer : -->
-        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <TextBlock x:Name="CurrentPlayerText" FontWeight="Bold" FontSize="25" Margin="0,10" TextWrapping="WrapWithOverflow" />
+        <Border BorderBrush="Black" BorderThickness="0,0,3,0"  >
+            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" >
 
-            <TextBlock Text="C'est à ton tour de jouer ta carte :" FontSize="15" Margin="0,10" TextWrapping="WrapWithOverflow" />
-            <Button x:Name="CardToPlayView" Width="50" Height="50" BorderThickness="3" />
-            <TextBlock x:Name="NumberCardCurrentPlayerText" Text="Il ne te reste que ** cartes dans ton paquet !" FontSize="15" TextWrapping="WrapWithOverflow" />
-            
+                <TextBlock x:Name="CurrentPlayerText" FontWeight="Bold" TextAlignment="Center" FontSize="45" Margin="0,10" TextWrapping="WrapWithOverflow" />
+
+                <TextBlock Text="C'est à ton tour de jouer ta carte :" FontSize="15" Margin="0,10" TextWrapping="WrapWithOverflow" />
+                <Button x:Name="CardToPlayView" Width="50" Height="50" BorderThickness="3" Background="White" />
+                <TextBlock x:Name="NumberCardCurrentPlayerText" FontSize="15" FontStyle="Italic" TextWrapping="WrapWithOverflow" />
+
+                <StackPanel Orientation="Horizontal" Margin="20,20" HorizontalAlignment="Center" >
+                    <Button Click="Button_SkipTurn" Width="130" Height="50" BorderThickness="3" Background="White" Content="Passer mon tour" FontSize="15" />
+
+                    <Button Margin="10,0" Click="Button_ResetGame" Background="Transparent" BorderThickness="0" Height="50" Width="50" >
+                        <Image Source="/img/reset.png" Height="50" />
+                    </Button>
+                    
+                    
+                </StackPanel>
+               
 
 
 
-        </StackPanel>
+
+            </StackPanel>
+
+
+        </Border>
+       
         
         
         
