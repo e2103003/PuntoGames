@@ -1,6 +1,6 @@
 # PuntoGames
 ## Installation et utilisation
-Pour ce faire vous pouvez utiliser directement le fichier Punto.exe ou bien lancer le projet avec Visual Studio (Fichier Punto.sln) et cliquer sur le bouton "Punto" (ou F5).
+Pour ce faire vous pouvez utiliser directement le fichier /release/Punto-Punto.exe ou bien lancer le projet avec Visual Studio (Fichier Punto.sln) et cliquer sur le bouton "Punto" (ou F5).
 Concernant les bases de données, elles fonctionnent dès le premier lancement du programme, il se peut que MySQL recontre des problèmes pour liéer le bon serveur, si besoin voici les informations de connexions :
 
 	- Serveur : 127.0.0.1
