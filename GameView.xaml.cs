@@ -21,7 +21,7 @@ namespace Punto
     /// </summary>
     public partial class GameView : UserControl
     {
-
+        private List<Player> players;
 
         public List<List<Cell>> bord;
         private int nombreLignes;
@@ -36,41 +36,14 @@ namespace Punto
 
 
         public GameView(List<Player> players, DatabaseUse database)
-        //public GameView()
         {
             this.database = database;
+            this.players = players;
             InitializeComponent();
 
-            bord = new List<List<Cell>>();
+            restartGame();
 
-            int nombreLignes = 11;
-            int nombreColonnes = 11;
-
-            // Initialisation de grille de jeu
-            for (int i = 0; i < nombreLignes; ++i)
-            {
-                bord.Add(new List<Cell>());
-                for (int j = 0; j < nombreColonnes; ++j)
-                {
-                    bord[i].Add(null);
-                    
-                }
-            }
-
-            // D'après les regles du jeu, la première carte doit être placée au milieu de la grille
-            Cell cellule = new Cell();
-            cellule.IsPlayable = true;
-            bord[5][5] = cellule;
-
-
-            game = new Game(players, this);
-
-            CardToPlay = game.CardToPlay();
-
-            CardToPlayView.Content = CardToPlay.Number;
-            CardToPlayView.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(CardToPlay.Color));
-
-            UpdateGrid();
+            
 
         }
 
@@ -79,6 +52,8 @@ namespace Punto
         {
             // on vide la grille
             BoardGrid.Children.Clear();
+
+            
 
             for (int i = 0; i < bord[0].Count; ++i)
             {
@@ -99,14 +74,21 @@ namespace Punto
                     b.Height = 47;
                     b.Width = 47;
 
-                    b.BorderThickness = new Thickness(3.5);
-                    b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
-                    b.Click += new RoutedEventHandler(Button_Click);
+                    
 
                     // desactiver le bouton si la cellule n'est pas jouable
                     if (bord[i][j] == null || !bord[i][j].IsPlayable)
                     {
-                        b.IsEnabled = false;
+                        b.IsEnabled = true;
+                        b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("Black"));
+                        b.BorderThickness = new Thickness(0);
+                    }
+                    else
+                    {
+                        b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
+
+                        b.BorderThickness = new Thickness(3.5);
+                        b.Click += new RoutedEventHandler(Button_Click);
                     }
                     Grid.SetRow(b, i);
                     Grid.SetColumn(b, j);
@@ -132,40 +114,91 @@ namespace Punto
         /// </summary>
         public void UpdatePlayableCells()
         {
-            // on parcourt toutes les cellules
+            // on parcourt la grille
             for (int i = 0; i < bord[0].Count; ++i)
             {
+                int nbCardInRow = 0;
                 for (int j = 0; j < bord.Count; ++j)
                 {
-                    // si la cellule est vide, on regarde si elle est jouable
-                    if (bord[i][j] == null)
+                    if (bord[i][j] != null && bord[i][j].Card != null)
                     {
-                        // on regarde si la cellule a une carte adjacente
-                        if (HasAdjacentCard(i, j))
-                        {
-                            // si oui, on la rend jouable
-                            Cell cellule = new Cell();
-                            cellule.IsPlayable = true;
-                            bord[i][j] = cellule;
-                        }
+                        nbCardInRow++;
+                    }
+
+                    if (nbCardInRow > 6)
+                    {
+                        bord[i][j].IsPlayable = false;
+
+                        
+
+                    }
+
+                    // on regarde si la cellule a une carte adjacente
+                    else if (HasAdjacentCard(i, j) )
+                    {
+                        bord[i][j].IsPlayable = true;
+                    }
+                    else
+                    {
+                        bord[i][j].IsPlayable = false;
                     }
                 }
             }
-
         }
 
-
+        
 
         internal void EndGame(Player winner)
         {
+            UpdateGrid();
             // on affiche le gagnant
             MessageBox.Show($"Le gagnant est { winner.Name} !");
+
+
 
             // On enregistre sa victoire dans la base de données
             database.AddVictory(winner);
 
 
         }
+
+        private void restartGame()
+        {
+            bord = new List<List<Cell>>();
+
+            int nombreLignes = 11;
+            int nombreColonnes = 11;
+
+            // Initialisation de grille de jeu
+            for (int i = 0; i < nombreLignes; ++i)
+            {
+                bord.Add(new List<Cell>());
+                for (int j = 0; j < nombreColonnes; ++j)
+                {
+                    bord[i].Add(new Cell());
+
+                }
+            }
+
+            // D'après les regles du jeu, la première carte doit être placée au milieu de la grille
+            Cell cellule = new Cell();
+            cellule.IsPlayable = true;
+            bord[5][5] = cellule;
+
+
+            game = new Game(players, this);
+
+            CardToPlay = game.CardToPlay();
+
+            CardToPlayView.Content = CardToPlay.Number;
+            CardToPlayView.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(CardToPlay.Color));
+
+            UpdateGrid();
+
+
+
+        }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -194,7 +227,7 @@ namespace Punto
                 this.CardToPlay = game.CardToPlay();
 
                 // on met a jour la taille de grille de jeu
-                reduceGrid(card, row, column);
+                //reduceGrid(card, row, column);
 
 
                 
@@ -218,72 +251,7 @@ namespace Punto
         }
 
 
-
-        /// <summary>
-        /// Cette méthode permet de réduire la taille de la grille de jeu, càd atteindre sa taille minimale de 6x6. Si la grille est déjà de taille minimale, on ne fait rien
-        /// Cette méthode est appelée à chaque fois qu'une carte est jouée, on réduit la taille la grille à l'opposé de la carte jouée
-        /// </summary>
-        private void reduceGrid(Card cardPlayed, int row, int column )
-        {
-            // on regarde si la grille est de taille minimale
-            if (bord[0].Count > 6 && bord.Count > 6)
-            {
-                // Si la carte jouée est sur le bord gauche, on supprime la colonne de droite
-                if (row > 5)
-                {
-                    // on supprime la colonne de droite
-                    bord[0].RemoveAt(bord[0].Count - 1);
-                    bord[1].RemoveAt(bord[1].Count - 1);
-                    bord[2].RemoveAt(bord[2].Count - 1);
-                    bord[3].RemoveAt(bord[3].Count - 1);
-                    bord[4].RemoveAt(bord[4].Count - 1);
-                    bord[5].RemoveAt(bord[5].Count - 1);
-                    bord[6].RemoveAt(bord[6].Count - 1);
-                    bord[7].RemoveAt(bord[7].Count - 1);
-                    bord[8].RemoveAt(bord[8].Count - 1);
-                    bord[9].RemoveAt(bord[9].Count - 1);
-                    bord[10].RemoveAt(bord[10].Count - 1);
-
-                   
-                } 
-                // Si la carte jouée est sur le bord droit, on supprime la colonne de gauche
-                else if (row < 5)
-                {
-                    // on supprime la colonne de gauche
-                    bord[0].RemoveAt(0);
-                    bord[1].RemoveAt(0);
-                    bord[2].RemoveAt(0);
-                    bord[3].RemoveAt(0);
-                    bord[4].RemoveAt(0);
-                    bord[5].RemoveAt(0);
-                    bord[6].RemoveAt(0);
-                    bord[7].RemoveAt(0);
-                    bord[8].RemoveAt(0);
-                    bord[9].RemoveAt(0);
-                    bord[10].RemoveAt(0);
-                }
-                // Si la carte jouée est sur le bord haut, on supprime la ligne du bas
-                else if (column > 5)
-                {
-                    // on supprime la ligne du bas
-                    bord.RemoveAt(bord.Count - 1);
-                }
-                // Si la carte jouée est sur le bord bas, on supprime la ligne du haut
-                else if (column < 5)
-                {
-                    // on supprime la ligne du haut
-                    bord.RemoveAt(0);
-                }
-                else
-                {
-
-                }
-               
-                
-            }
            
-
-        }
 
         
 

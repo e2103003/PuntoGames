@@ -100,6 +100,8 @@ namespace Punto
 
                 // comme la carte a été jouée, on peut mettre à jour les cellules jouables, càd les cellules qui ont une carte adjacente
                 gameView.UpdatePlayableCells();
+
+
                 ret = true;
             }
 
@@ -109,77 +111,88 @@ namespace Punto
 
         private bool CheckWin()
         {
-            // Pour qu'un joueur gagne, il faut qu'il ait soit une ligne, soit une colonne, soit une diagonale complète de 5 cartes de sa couleur
-            // On vérifie donc les lignes
-            for (int i = 0; i < nombreLignes; i++)
+            // Vérifier les lignes
+            for (int i = 0; i < gameView.bord.Count; i++)
             {
-                int compteur = 0;
-                for (int j = 0; j < nombreColonnes; j++)
+                int consecutiveCount = 0;
+                for (int j = 0; j < gameView.bord[i].Count; j++)
                 {
-                    if (gameView.bord[i][j].Card.Color == currentPlayer.Color)
+                    if (gameView.bord[i][j].Card != null && gameView.bord[i][j].Card.Color == currentPlayer.Color)
                     {
-                        compteur++;
+                        consecutiveCount++;
+                        if (consecutiveCount == 5)
+                        {
+                            return true; // Le joueur a gagné
+                        }
+                    }
+                    else
+                    {
+                        consecutiveCount = 0; // Réinitialiser le compteur s'il y a une interruption
                     }
                 }
-                if (compteur == 5)
-                {
-                    return true;
-                }
             }
 
-            // On vérifie les colonnes
-            for (int i = 0; i < nombreColonnes; i++)
+            // Vérifier les colonnes
+            for (int j = 0; j < gameView.bord[0].Count; j++)
             {
-                int compteur = 0;
-                for (int j = 0; j < nombreLignes; j++)
+                int consecutiveCount = 0;
+                for (int i = 0; i < gameView.bord.Count; i++)
                 {
-                    if (gameView.bord[j][i].Card.Color == currentPlayer.Color)
+                    if (gameView.bord[i][j].Card != null && gameView.bord[i][j].Card.Color == currentPlayer.Color)
                     {
-                        compteur++;
+                        consecutiveCount++;
+                        if (consecutiveCount == 5)
+                        {
+                            return true; // Le joueur a gagné
+                        }
+                    }
+                    else
+                    {
+                        consecutiveCount = 0; // Réinitialiser le compteur s'il y a une interruption
                     }
                 }
-                if (compteur == 5)
+            }
+
+            // Vérifier les diagonales
+            for (int i = 0; i < gameView.bord.Count - 4; i++)
+            {
+                for (int j = 0; j < gameView.bord[i].Count - 4; j++)
                 {
-                    return true;
+                    if (gameView.bord[i][j].Card != null && gameView.bord[i][j].Card.Color == currentPlayer.Color)
+                    {
+                        // Vérifier la diagonale vers le bas à droite
+                        if (gameView.bord[i + 1][j + 1].Card != null && gameView.bord[i + 1][j + 1].Card.Color == currentPlayer.Color &&
+                            gameView.bord[i + 2][j + 2].Card != null && gameView.bord[i + 2][j + 2].Card.Color == currentPlayer.Color &&
+                            gameView.bord[i + 3][j + 3].Card != null && gameView.bord[i + 3][j + 3].Card.Color == currentPlayer.Color &&
+                            gameView.bord[i + 4][j + 4].Card != null && gameView.bord[i + 4][j + 4].Card.Color == currentPlayer.Color)
+                        {
+                            return true; // Le joueur a gagné
+                        }
+                    }
                 }
             }
 
-            // On vérifie la diagonale haut gauche - bas droite
-            int compteurDiag = 0;
-            for (int i = 0; i < nombreLignes; i++)
+            for (int i = 4; i < gameView.bord.Count; i++)
             {
-                if (gameView.bord[i][i].Card.Color == currentPlayer.Color)
+                for (int j = 0; j < gameView.bord[i].Count - 4; j++)
                 {
-                    compteurDiag++;
+                    if (gameView.bord[i][j].Card != null && gameView.bord[i][j].Card.Color == currentPlayer.Color)
+                    {
+                        // Vérifier la diagonale vers le bas à gauche
+                        if (gameView.bord[i - 1][j + 1].Card != null && gameView.bord[i - 1][j + 1].Card.Color == currentPlayer.Color &&
+                            gameView.bord[i - 2][j + 2].Card != null && gameView.bord[i - 2][j + 2].Card.Color == currentPlayer.Color &&
+                            gameView.bord[i - 3][j + 3].Card != null && gameView.bord[i - 3][j + 3].Card.Color == currentPlayer.Color &&
+                            gameView.bord[i - 4][j + 4].Card != null && gameView.bord[i - 4][j + 4].Card.Color == currentPlayer.Color)
+                        {
+                            return true; // Le joueur a gagné
+                        }
+                    }
                 }
             }
-            if (compteurDiag == 5)
-            {
-                return true;
-            }
 
-            // On vérifie la diagonale haut droite - bas gauche
-            compteurDiag = 0;
-            for (int i = 0; i < nombreLignes; i++)
-            {
-                if (gameView.bord[i][nombreColonnes - i - 1].Card.Color == currentPlayer.Color)
-                {
-                    compteurDiag++;
-                }
-            }
-            if (compteurDiag == 5)
-            {
-                return true;
-            }
-
-            compteurDiag = 0;
-
-
-
-            return false;
-
-            
+            return false; // Aucune victoire détectée
         }
+
 
         public Player getCurrentPlayer()
         {
