@@ -1,4 +1,5 @@
 ﻿using Punto.Database;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,11 +14,14 @@ namespace Punto
         private DatabaseUse database;
         public ObservableCollection<Player> Players { get; set; }
 
+        private List<Player> playerList;
+
         public ChoosePlayers(DatabaseUse database)
         {
             InitializeComponent();
             DataContext = this;
             this.database = database;
+            this.playerList = new List<Player>();
 
             database.LoadDatas();
 
@@ -46,6 +50,35 @@ namespace Punto
             PopUpBDD popUpBDD = new PopUpBDD();
             this.Content = popUpBDD;
             var parentWindow = Window.GetWindow(this);
+
+        }
+
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            bool check = (bool)((CheckBox)sender).IsChecked;
+            var player = (Player)((CheckBox)sender).Tag;
+
+            if (check)
+            {
+                playerList.Add(player);
+            }
+            else
+            {
+                playerList.Remove(player);
+            }
+        }
+
+        private void ButtonLancerPartie_Click(object sender, RoutedEventArgs e)
+        {
+            if (playerList.Count > 1)
+            {
+                GameView gameView = new GameView(playerList, database);
+                this.Content = gameView;
+            }
+            else
+            {
+                MessageBox.Show("Vous devez sélectionner au moins deux joueurs pour lancer une partie !");
+            }
 
         }
     }

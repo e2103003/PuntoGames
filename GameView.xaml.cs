@@ -148,25 +148,33 @@ namespace Punto
 
         
 
-        internal void EndGame(Player winner)
+        public void EndGame(Player winner)
         {
             UpdateGrid();
             // on affiche le gagnant
             MessageBox.Show($"Le gagnant est { winner.Name} !");
 
 
-
             // On enregistre sa victoire dans la base de données
             database.AddVictory(winner);
 
-            // On redémarre une partie
-            restartGame();
 
+
+            // On redémarre une partie
+           restartGame();
 
         }
 
         private void restartGame()
         {
+            // on vide la grille
+            BoardGrid.Children.Clear();
+            if(bord != null)
+            {
+                bord.Clear();
+            }
+            
+            
             bord = new List<List<Cell>>();
 
             int nombreLignes = 11;
@@ -216,7 +224,12 @@ namespace Punto
             
             bool canPlay = game.PlayCard(card, row, column);
 
-            if(!canPlay)
+            if (game.CheckWin())
+            {
+
+
+            }
+            else if (!canPlay)
             {
                 MessageBox.Show("Vous ne pouvez pas jouer cette carte ici !");
             }
@@ -228,12 +241,7 @@ namespace Punto
                 
 
                 this.CardToPlay = game.CardToPlay();
-
-                // on met a jour la taille de grille de jeu
-                //reduceGrid(card, row, column);
-
-
-                
+                              
 
             }
             var test = bord;

@@ -36,13 +36,13 @@ namespace Punto
             players.Add(new Player() { Name = "Joueur 1", Color = "Red" });
             players.Add(new Player() { Name = "Joueur 2", Color = "Blue" });
 
-            DatabaseUse database = new DatabaseUse("MySQL");
+            //DatabaseUse database = new DatabaseUse("MySQL");
 
-            GameView gameView = new GameView(players, database);
+            //GameView gameView = new GameView(players, database);
 
 
             // Affichez le UserControl dans la fenêtre principale.
-            this.Content = gameView;
+            this.Content = popUpBDD;
 
         }
     }

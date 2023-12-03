@@ -38,7 +38,7 @@
                                         <TextBlock Text="{Binding LastWin}"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" >
-                                        <Button Content="Choisir" Height="30" Width="70" Margin="0,5"  VerticalAlignment="Bottom"  HorizontalAlignment="Center"/>
+                                        <CheckBox Click="CheckBox_Click" Content="Choisir"  Height="30" Width="70" Margin="0,10" Tag="{Binding}" />
                                         <Button Height="30" Width="30" Margin="10,0,0,0" Background="White" Click="ButtonEdit_Click" Tag= "{Binding}" >
                                             <Image Source="/img/edit.png" />
                                         </Button>
@@ -48,13 +48,26 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                <Border BorderBrush="Black" BorderThickness="1" Margin="5" Padding="5" Height="75" Width="190">
-                    <StackPanel HorizontalAlignment="Center" >
-                        <TextBlock Text="Ajouter un joueur" FontWeight="Bold" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="5" Padding="5" Height="75" Width="190">
+                        <StackPanel HorizontalAlignment="Center" >
+                            <TextBlock Text="Ajouter un joueur" FontWeight="Bold" />
 
-                        <Button Content="Ajouter" Height="30" Width="70" Margin="0,5"  VerticalAlignment="Bottom"  HorizontalAlignment="Center" Click="ButtonAjouter_Click" />
-                    </StackPanel>
-                </Border>
+                            <Button Content="Ajouter" Height="30" Width="70" Margin="0,5"  VerticalAlignment="Bottom"  HorizontalAlignment="Center" Click="ButtonAjouter_Click"  />
+                        </StackPanel>
+
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="5" Padding="5" Height="75" Width="190">
+
+
+                        <Button Content="lancer une partie" FontSize="15" Height="45" Width="120"  VerticalAlignment="Center"  HorizontalAlignment="Center" Click="ButtonLancerPartie_Click" />
+                        
+
+                    </Border>
+
+                </StackPanel>
+                
+
             </StackPanel>
         </ScrollViewer>
 

@@ -1,9 +1,6 @@
 ﻿using Punto.Database;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Punto
 {
@@ -89,6 +86,7 @@ namespace Punto
                     winner = currentPlayer;
                     // on arrête le jeu
                     gameView.EndGame(winner);
+                    return false;
                 }
                 else
                 {
@@ -109,7 +107,7 @@ namespace Punto
             
         }
 
-        private bool CheckWin()
+        public bool CheckWin()
         {
             // Vérifier les lignes
             for (int i = 0; i < gameView.bord.Count; i++)
