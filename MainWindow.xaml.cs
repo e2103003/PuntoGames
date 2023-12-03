@@ -33,12 +33,16 @@ namespace Punto
             PopUpBDD popUpBDD = new PopUpBDD();
 
             List<Player> players = new List<Player>();
+            players.Add(new Player() { Name = "Joueur 1", Color = "Red" });
+            players.Add(new Player() { Name = "Joueur 2", Color = "Blue" });
 
-           // GameView gameView = new GameView(players, null);
+            DatabaseUse database = new DatabaseUse("MySQL");
+
+            GameView gameView = new GameView(players, database);
 
 
             // Affichez le UserControl dans la fenêtre principale.
-            this.Content = popUpBDD;
+            this.Content = gameView;
 
         }
     }

@@ -42,11 +42,21 @@ namespace Punto
         }
 
 
-        public Card CardToPlay( )
+        public Card CardToPlay()
         {
+            Card ret = null;
             // on choisit une carte au hasard dans le paquet du joueur et on la supprime du paquet
-            Card ret = currentPlayer.Paquet.Cards[new Random().Next(currentPlayer.Paquet.Cards.Count)];
-            currentPlayer.Paquet.Cards.Remove(ret);
+            if(currentPlayer.Paquet.Cards.Count == 0)
+            {
+                // on a plus de cartes, on a perdu
+                gameView.EndGame(currentPlayer);
+            }
+            else
+            {
+                ret = currentPlayer.Paquet.Cards[new Random().Next(currentPlayer.Paquet.Cards.Count)];
+                currentPlayer.Paquet.Cards.Remove(ret);
+            }
+            
 
             return ret;
         }
@@ -65,11 +75,13 @@ namespace Punto
             }
         }
 
-        public void PlayCard(Card cardToPlay, int row, int column)
+        public bool PlayCard(Card cardToPlay, int row, int column)
         {
-            if(gameView.bord[row][column].Card.Color != cardToPlay.Color && gameView.bord[row][column].Card.Number < cardToPlay.Number )
+            bool ret = false;
+            if(gameView.bord[row][column].Card == null || (gameView.bord[row][column].Card.Color != cardToPlay.Color && gameView.bord[row][column].Card.Number < cardToPlay.Number) )
             {
                 gameView.bord[row][column].Card = cardToPlay;
+
 
                 // on vérifie si le joueur a gagné
                 if (CheckWin())
@@ -78,14 +90,20 @@ namespace Punto
                     // on arrête le jeu
                     gameView.EndGame(winner);
                 }
+                else
+                {
+                    // on passe au joueur suivant
+                    NextPlayer();
+                }
 
 
 
+                // comme la carte a été jouée, on peut mettre à jour les cellules jouables, càd les cellules qui ont une carte adjacente
+                gameView.UpdatePlayableCells();
+                ret = true;
             }
 
-
-
-
+            return ret;
             
         }
 
@@ -162,6 +180,14 @@ namespace Punto
 
             
         }
+
+        public Player getCurrentPlayer()
+        {
+            return currentPlayer;
+        }
+
+
+
 
         public Player getWinner()
         {

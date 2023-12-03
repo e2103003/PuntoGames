@@ -101,12 +101,6 @@ namespace Punto
             this.Content = choosePlayers;
         }
 
-        private void BtnTest_Click(object sender, RoutedEventArgs e)
-        {
-            // test d'une nouvelle victoire du joueur
-            database.AddVictory(this.player);
-
-        }
 
 
 

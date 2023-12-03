@@ -8,14 +8,18 @@
       Background="white">
 
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
 
-        <TextBlock Text="GRILLE :" FontSize="40" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"/>
+
+        <TextBlock  Grid.Column="1"  Text="GRILLE DE JEU :" FontSize="40" Grid.Row="0" HorizontalAlignment="Center"/>
 
         <TextBlock Text="{Binding Grid[0][2].Number}" FontSize="40"/>
 
-        <Border BorderBrush="Black" BorderThickness="2"  HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <UniformGrid x:Name="BoardGrid" Columns="{Binding Grid[0].Count}" Rows="{Binding Grid.Count}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="550" Height="550" Background="Black" >
+        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2"  HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <UniformGrid x:Name="BoardGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="550" Height="550" Background="Black" >
                 
             </UniformGrid>
         </Border>
@@ -23,16 +27,12 @@
 
 
         <!-- la carte du joueur à jouer : -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" >
-            <!--<TextBlock  FontSize="40" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
-                <Run Text="CARTE A JOUER : joueur "/>
-                <Run Text="{Binding CardToPlay.Number}"/>
-            </TextBlock>
-            <Border BorderBrush="Black" BorderThickness="2" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
-                 <Border.Background>
-                    <ImageBrush ImageSource="{Binding CardToPlay.Image}"/>
-                </Border.Background>
-            </Border>-->
+        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <TextBlock x:Name="CurrentPlayerText" Text="C'est au tour du joueur :" FontSize="15" />
+            <TextBlock x:Name="NumberCardCurrentPlayerText" Text="Il ne te reste que ** cartes dans ton paquet !" FontSize="15" />
+            <Button x:Name="CardToPlayView" Width="50" Height="50" BorderThickness="3" />
+
+
 
         </StackPanel>
         
