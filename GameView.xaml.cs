@@ -256,6 +256,9 @@ namespace Punto
         {
             // on passe au joueur suivant
             game.NextPlayer();
+            this.CardToPlay = game.CardToPlay();
+
+
 
             // on met a jour la grille
             UpdateGrid();
@@ -328,6 +331,18 @@ namespace Punto
             }
             return ret; 
             
+        }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Voulez-vous vraiment retourner au menu et arrêter la partie ? la progression ne sera pas sauvegarder.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                PopUpBDD popUpBDD = new PopUpBDD();
+                this.Content = popUpBDD;
+            }
+            
+
         }
     }
 

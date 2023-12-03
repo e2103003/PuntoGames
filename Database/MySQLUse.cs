@@ -48,6 +48,12 @@ namespace Punto.Database
                 {
                     while (reader.Read())
                     {
+                        // On vérifie si la base n'est pas vide pour éviter les erreurs
+                        if (reader.HasRows == false)
+                        {
+                            return players;
+                        } 
+
                         Player player = new Player
                         {
                             Id = reader.GetInt32("id"),

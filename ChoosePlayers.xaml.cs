@@ -70,14 +70,36 @@ namespace Punto
 
         private void ButtonLancerPartie_Click(object sender, RoutedEventArgs e)
         {
-            if (playerList.Count > 1)
+            if (playerList.Count > 1 && playerList.Count <=4)
             {
-                GameView gameView = new GameView(playerList, database);
-                this.Content = gameView;
+                //on compare que les joueurs n'ont pas la même couleur
+                bool sameColor = false;
+                for (int i = 0; i < playerList.Count; i++)
+                {
+                    for (int j = i + 1; j < playerList.Count; j++)
+                    {
+                        if (playerList[i].Color == playerList[j].Color)
+                        {
+                            sameColor = true;
+                        }
+                    }
+                }
+                if (sameColor)
+                {
+                       MessageBox.Show("Vous ne pouvez pas avoir deux joueurs avec la même couleur !");
+                    return;
+                }
+                else
+                {
+                    GameView gameView = new GameView(playerList, database);
+                    this.Content = gameView;
+                }
             }
+
+                
             else
             {
-                MessageBox.Show("Vous devez sélectionner au moins deux joueurs pour lancer une partie !");
+                MessageBox.Show("Vous devez sélectionner au moins deux et maximum 4 joueurs pour lancer une partie !");
             }
 
         }

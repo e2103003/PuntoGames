@@ -12,6 +12,10 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
+        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Click="ButtonBack_Click" IsCancel="True" Background="Transparent" BorderThickness="0">
+            <Image Source="img/back.png" Height="50" />
+        </Button>
+
 
 
         <TextBlock  Grid.Column="1"  Text="GRILLE DE JEU :" FontSize="40" Grid.Row="0" HorizontalAlignment="Center"/>
