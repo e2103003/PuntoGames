@@ -22,10 +22,10 @@ Il est possible, depuis le menu principal, de transférer les données d'une base 
 Vous pouvez, pour les 3 base de données, créer modifier ou supprimer un joueur, pour ce faire il suffit de cliquer sur le bouton correspondant et de remplir les champs.
 
 
-
 ### Gameplay
 Le jeu se joue de 2 à 4 joueurs, chaque joueurs dispose de 18 cartes (de 1 à 9) et doit avoir une couleur différente, le but étant d'aligner 5 cartes de la même couleur (horizontalement, verticalement ou en diagonale). <br>
 Durant la partie, vous pouvez :
+		
 	- placer votre carte sur le plateau en cliquant sur la case correspondante, les cases jouables sont avec les bords noirs
 	- Passer votre tour en cliquant sur le bouton "Passer mon tour" 
 	- Recommencer la partie en cliquant sur le bouton avec le logo de la flèche circulaire
