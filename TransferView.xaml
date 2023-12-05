@@ -20,7 +20,16 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="3*"/>
+                
+                <RowDefinition Height="0.5*"/>
+
+                <RowDefinition Height="*"/>
+
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.5*"/>
+
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -38,9 +47,24 @@
             <Label Grid.Row="1" Grid.Column="0" Content="Base de données cible : " FontSize="20" HorizontalAlignment="Right"  VerticalAlignment="Center"/>
             <ComboBox Grid.Row="1" Grid.Column="1" x:Name="Cible" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
 
-            <Button  Grid.Row="2" Grid.ColumnSpan="2" Content="Transférer" Height="80" Width="150" FontSize="20" Click="Button_Click" />
+            <Button  Grid.Row="2" Grid.ColumnSpan="2" Content="Transférer" Width="150" FontSize="20" Click="ButtonTransfer_Click" />
+
+            <!-- Barre de séparation -->
+            <Rectangle Grid.Row="3" Grid.ColumnSpan="2" Fill="Black" Height="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+
+            <!-- Coté pour la génération alétoire de joueur : -->
+            <Label Grid.Row="4" Grid.Column="0" Content="Nombre de joueur à générer : " FontSize="20" HorizontalAlignment="Right"  VerticalAlignment="Center"/>
+
+            <!-- Input pour séléctionner un int : -->
+            <TextBox Grid.Row="4" Grid.Column="1" x:Name="NbJoueurGen" HorizontalAlignment="Left" Width="35" Height="30" VerticalAlignment="Center" PreviewTextInput="NbJoueurGen_PreviewTextInput" />
+            
+            
 
 
+            <Label Grid.Row="5" Grid.Column="0" Content="Base dans laquelle générer : " FontSize="20" HorizontalAlignment="Right"  VerticalAlignment="Center"  /> 
+
+            <ComboBox Grid.Row="5" Grid.Column="1" x:Name="BaseGen" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+            <Button  Grid.Row="6" Grid.ColumnSpan="2" Content="Générer" Width="150" FontSize="20" Click="ButtonGeneration_Click" />
 
         </Grid>
     </Grid>

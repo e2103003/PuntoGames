@@ -16,9 +16,6 @@ namespace Punto
         private Player currentPlayer;
         private Player winner;
 
-        private int nombreLignes;
-        private int nombreColonnes;
-        private int nombreCartes;
 
 
         public Game (List<Player> players, GameView gameView)
@@ -79,6 +76,8 @@ namespace Punto
             {
                 gameView.bord[row][column].Card = cardToPlay;
 
+                gameView.UpdateLimitGrid(row, column);
+
 
                 // on vérifie si le joueur a gagné
                 if (CheckWin())
@@ -98,6 +97,8 @@ namespace Punto
 
                 // comme la carte a été jouée, on peut mettre à jour les cellules jouables, càd les cellules qui ont une carte adjacente
                 gameView.UpdatePlayableCells();
+
+
 
 
                 ret = true;

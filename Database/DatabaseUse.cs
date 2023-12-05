@@ -189,5 +189,35 @@ namespace Punto
             }
             
         }
+
+
+        // méthode qui permet de générer des données aléatoires dans la base de données en fonction du nombre de joueurs
+        public void GenerateDatas(double value)
+        {
+            // liste des couleurs
+            List<string> colors = new List<string>() { "Blue", "Orange", "Green", "Purple", "Yellow", "Red" };
+            // génération de la liste de joueurs       
+            List<Player> players = new List<Player>(); 
+            for (int i = 0; i < value; i++)            
+            {                                          
+                Player player = new Player();          
+                player.Name = "Joueur " + i;
+                // on choisit une couleur au hasard dans la liste des couleurs
+                player.Color = colors[new Random().Next(colors.Count)];
+                player.Wins = new Random().Next(0, 100);
+                // on génére u date aléatoire entre le 1er janvier 2020 et aujourd'hui
+                DateTime start = new DateTime(2020, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                player.LastWin = start.AddDays(new Random().Next(range)).ToString();
+                players.Add(player);
+            }
+            // on ajoute les joueurs à la base de données
+            foreach (Player player in players)
+            {
+                AddPlayer(player);
+            }
+
+
+        }
     }
 }
