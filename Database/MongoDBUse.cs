@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace Punto.Database
 {
-    internal class MongoDBUse
+    internal class MongoDBUse : ITechnoUse
     {
 
         private IMongoDatabase _database;
@@ -41,7 +41,7 @@ namespace Punto.Database
             _countersCollection = _database.GetCollection<BsonDocument>("Counters");
         }
 
-        public List<Player> LoadPlayersFromDatabase()
+        public List<Player> LoadPlayersFromDatabaseAsync()
         {
             var collection = _database.GetCollection<Player>("Player");
             var filter = Builders<Player>.Filter.Empty;

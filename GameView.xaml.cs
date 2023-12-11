@@ -187,7 +187,6 @@ namespace Punto
                 }
                 else if (row < 5 && row > limitRowLeft)
                 {
-                    
                     limitRowRight--;
                 }
             }

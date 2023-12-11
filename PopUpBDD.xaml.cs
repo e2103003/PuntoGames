@@ -54,6 +54,19 @@ namespace Punto
 
         }
 
+        private void Neo4j_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DatabaseUse database = new DatabaseUse("Neo4j");
+                //ChangeView(database);
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Erreur à la connexion a la BDD Neo4j: {ex}");
+            }
+        }
+
         private void ChangeView(DatabaseUse database)
         {
             Window mainWindow = Window.GetWindow(this);

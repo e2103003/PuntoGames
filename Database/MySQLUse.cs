@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace Punto.Database
 {
-    internal class MySQLUse
+    internal class MySQLUse : ITechnoUse
     {
         public static MySqlConnection MySqlConnection;
 
@@ -28,17 +28,10 @@ namespace Punto.Database
             }
         }
 
-        List<Player> players;
 
 
-        private void LoadData()
-        {
-            players = LoadPlayersFromDatabase();
-            
-        }
 
-
-        public List<Player> LoadPlayersFromDatabase()
+        public List<Player> LoadPlayersFromDatabaseAsync()
         {
             List<Player> players = new List<Player>();
 

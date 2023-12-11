@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace Punto.Database
 {
-    internal class SQLiteUse
+    internal class SQLiteUse : ITechnoUse
     {
 
         private SQLiteConnection database;
@@ -77,7 +77,7 @@ namespace Punto.Database
 
         List<Player> players;
 
-        public List<Player> LoadPlayersFromDatabase()
+        public List<Player> LoadPlayersFromDatabaseAsync()
         {
             List<Player> players = new List<Player>();
 

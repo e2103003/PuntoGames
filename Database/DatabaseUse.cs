@@ -14,11 +14,9 @@ namespace Punto
     public class DatabaseUse
     {
         private MySQLUse mySQLUse;
-        private IMongoDatabase _database;
-
-
         private MongoDBUse mongoDBUse;
         private SQLiteUse sqliteUse;
+        private Neo4jUse neo4jUse;
 
        
 
@@ -36,7 +34,7 @@ namespace Punto
                 try
                 {
                     mySQLUse = new MySQLUse();
-                    LoadDatas();
+                    LoadDatasAsync();
                 }
                 catch (Exception e){
                     MessageBox.Show($"Erreur connexion à la base de données MySQL : {e}");
@@ -48,7 +46,7 @@ namespace Punto
                 try
                 {
                     mongoDBUse = new MongoDBUse();
-                    LoadDatas();
+                    LoadDatasAsync();
                     
                 }
                 catch (Exception e)
@@ -60,7 +58,13 @@ namespace Punto
             else if(databaseTechno == "SQLite")
             {
                 sqliteUse = new SQLiteUse();
-                LoadDatas();
+                LoadDatasAsync();
+            }
+            else if(databaseTechno == "Neo4j")
+            {
+                neo4jUse = new Neo4jUse();
+                //neo4jUse.AddPlayerToDatabaseAsync(null);
+                LoadDatasAsync();
             }
             else
             {
@@ -70,20 +74,24 @@ namespace Punto
 
         }
 
-        public void LoadDatas()
+        public async Task LoadDatasAsync()
         {
             if (databaseTechno == "MySQL" && mySQLUse != null)
             {
-                players = mySQLUse.LoadPlayersFromDatabase();
+                players = mySQLUse.LoadPlayersFromDatabaseAsync();
             }
             else if (databaseTechno == "MongoDB" && mongoDBUse != null)
             {
-                players = mongoDBUse.LoadPlayersFromDatabase();
+                players = mongoDBUse.LoadPlayersFromDatabaseAsync();
             }
             else if (databaseTechno == "SQLite" && sqliteUse != null)
             {
-                
-                players = sqliteUse.LoadPlayersFromDatabase();
+                players = sqliteUse.LoadPlayersFromDatabaseAsync();
+            }
+            else if (databaseTechno == "Neo4j" && neo4jUse != null)
+            {
+                //neo4jUse.AddPlayerToDatabase(null);
+                players = await neo4jUse.LoadPlayersFromDatabaseAsync();
             }
             else
             {
@@ -111,6 +119,10 @@ namespace Punto
             {
                 sqliteUse.DeletePlayerFromDatabase(player.Id);
             }
+            else if (databaseTechno == "Neo4j" && neo4jUse != null)
+            {
+                neo4jUse.DeletePlayerFromDatabase(player.Id);
+            }
             else
             {
                 MessageBox.Show("Erreur technologie de base de données introuvable ou null : " + databaseTechno);
@@ -131,6 +143,10 @@ namespace Punto
             else if (databaseTechno == "SQLite" && sqliteUse != null)
             {
                 sqliteUse.UpdatePlayerInDatabase(player);
+            }
+            else if (databaseTechno == "Neo4j" && neo4jUse != null)
+            {
+                neo4jUse.UpdatePlayerInDatabase(player);
             }
             else
             {
@@ -153,6 +169,12 @@ namespace Punto
             {
                 sqliteUse.AddPlayerToDatabase(player);
             }
+            else if (databaseTechno == "Neo4j" && neo4jUse != null)
+            {
+                neo4jUse.AddPlayerToDatabaseAsync(player);
+            }
+
+
             else
             {
                 MessageBox.Show("Erreur technologie de base de données introuvable ou null : " + databaseTechno);
@@ -183,6 +205,7 @@ namespace Punto
             {
                 sqliteUse.AddVictoryToDatabase(winner);
             }
+
             else
             {
                 MessageBox.Show("Erreur technologie de base de données introuvable ou null : " + databaseTechno);

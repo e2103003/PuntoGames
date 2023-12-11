@@ -23,7 +23,7 @@ namespace Punto
             this.database = database;
             this.playerList = new List<Player>();
 
-            database.LoadDatas();
+            database.LoadDatasAsync();
 
             
             Players = new ObservableCollection<Player>(database.GetPlayers());
