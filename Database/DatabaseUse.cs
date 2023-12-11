@@ -63,8 +63,6 @@ namespace Punto
             else if(databaseTechno == "Neo4j")
             {
                 neo4jUse = new Neo4jUse();
-                //neo4jUse.AddPlayerToDatabaseAsync(null);
-                LoadDatasAsync();
             }
             else
             {
@@ -90,7 +88,7 @@ namespace Punto
             }
             else if (databaseTechno == "Neo4j" && neo4jUse != null)
             {
-                //neo4jUse.AddPlayerToDatabase(null);
+                
                 players = await neo4jUse.LoadPlayersFromDatabaseAsync();
             }
             else
@@ -104,7 +102,7 @@ namespace Punto
         public List<Player> GetPlayers() { return players; }
 
 
-        public void DeletePlayer(Player player)
+        public async Task DeletePlayerAsync(Player player)
         {
             players.Remove(player);
             if(databaseTechno == "MySQL" && mySQLUse != null)
@@ -121,7 +119,7 @@ namespace Punto
             }
             else if (databaseTechno == "Neo4j" && neo4jUse != null)
             {
-                neo4jUse.DeletePlayerFromDatabase(player.Id);
+                await neo4jUse.DeletePlayerFromDatabaseAsync(player.Id);
             }
             else
             {
@@ -130,7 +128,7 @@ namespace Punto
 
         }
 
-        public void ModifyPlayer(Player player)
+        public async Task ModifyPlayerAsync(Player player)
         {
             if (databaseTechno == "MySQL" && mySQLUse != null)
             {
@@ -146,7 +144,7 @@ namespace Punto
             }
             else if (databaseTechno == "Neo4j" && neo4jUse != null)
             {
-                neo4jUse.UpdatePlayerInDatabase(player);
+                await neo4jUse.UpdatePlayerInDatabaseAsync(player);
             }
             else
             {
@@ -155,7 +153,7 @@ namespace Punto
         }
 
 
-        public void AddPlayer(Player player)
+        public async Task AddPlayerAsync(Player player)
         {
             if (databaseTechno == "MySQL" && mySQLUse != null)
             {
@@ -171,7 +169,7 @@ namespace Punto
             }
             else if (databaseTechno == "Neo4j" && neo4jUse != null)
             {
-                neo4jUse.AddPlayerToDatabaseAsync(player);
+                await neo4jUse.AddPlayerToDatabaseAsync(player);
             }
 
 
@@ -195,15 +193,19 @@ namespace Punto
 
             if (databaseTechno == "MySQL" && mySQLUse != null)
             {                
-                mySQLUse.AddVictoryToDatabase(winner);
+                mySQLUse.UpdatePlayerInDatabase(winner);
             }
             else if (databaseTechno == "MongoDB" && mongoDBUse != null)
             {
-                mongoDBUse.AddVictoryToDatabase(winner);
+                mongoDBUse.UpdatePlayerInDatabase(winner);
             }
             else if (databaseTechno == "SQLite" && sqliteUse != null)
             {
-                sqliteUse.AddVictoryToDatabase(winner);
+                sqliteUse.UpdatePlayerInDatabase(winner);
+            }
+            else if (databaseTechno == "Neo4j" && neo4jUse != null)
+            {
+                neo4jUse.UpdatePlayerInDatabaseAsync(winner);
             }
 
             else
@@ -237,7 +239,7 @@ namespace Punto
             // on ajoute les joueurs à la base de données
             foreach (Player player in players)
             {
-                AddPlayer(player);
+                AddPlayerAsync(player);
             }
 
 

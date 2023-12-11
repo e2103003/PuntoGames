@@ -97,14 +97,6 @@ namespace Punto.Database
             _playersCollection.DeleteOne(filter);
         }
 
-        public void AddVictoryToDatabase(Player winner)
-        {
-            var filter = Builders<Player>.Filter.Eq(p => p.Id, winner.Id);
-            var update = Builders<Player>.Update
-                .Set(p => p.Wins, winner.Wins)
-                .Set(p => p.LastWin, winner.LastWin);
-
-            _playersCollection.UpdateOne(filter, update);
-        }
+        
     }
 }

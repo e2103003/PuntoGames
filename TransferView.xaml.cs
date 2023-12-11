@@ -17,9 +17,9 @@ namespace Punto
         {
             InitializeComponent();
 
-            Source.ItemsSource = new List<string>() { "MySQL", "MongoDB", "SQLite" };
-            Cible.ItemsSource = new List<string>() { "MySQL", "MongoDB", "SQLite" };
-            BaseGen.ItemsSource = new List<string>() { "MySQL", "MongoDB", "SQLite" };
+            Source.ItemsSource = new List<string>() { "MySQL", "MongoDB", "SQLite", "Neo4j" };
+            Cible.ItemsSource = new List<string>() { "MySQL", "MongoDB", "SQLite", "Neo4j" };
+            BaseGen.ItemsSource = new List<string>() { "MySQL", "MongoDB", "SQLite", "Neo4j" };
         }
 
 
@@ -46,7 +46,7 @@ namespace Punto
                     // On compare les noms des joueurs
                     if (playersCible.Where(p => p.Name == player.Name).Count() == 0)
                     {
-                        databaseCible.AddPlayer(player);
+                        databaseCible.AddPlayerAsync(player);
                     }
                     
                        

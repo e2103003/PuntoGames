@@ -107,19 +107,5 @@ namespace Punto.Database
             }
         }
 
-        public void AddVictoryToDatabase(Player winner)
-        {
-            string query = "UPDATE Player SET Wins = @Wins, LastWin = @LastWin WHERE Id = @Id";
-
-            using (MySqlCommand cmd = new MySqlCommand(query, MySqlConnection))
-            {
-                cmd.Parameters.AddWithValue("@Id", winner.Id);
-                cmd.Parameters.AddWithValue("@Wins", winner.Wins);
-                cmd.Parameters.AddWithValue("@LastWin", winner.LastWin);
-
-                cmd.ExecuteNonQuery();
-            }
-            
-        }
     }
 }

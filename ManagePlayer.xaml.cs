@@ -1,18 +1,7 @@
 ﻿using Punto.Database;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Punto
 {
@@ -52,21 +41,21 @@ namespace Punto
         }
 
        
-        private void BtnValider_Click(object sender, RoutedEventArgs e)
+        private async void BtnValider_Click(object sender, RoutedEventArgs e)
         {
-            
             if (this.player != null)
             {
                 this.player.Name = inputName.Text;
                 this.player.Color = ((ListBoxItem)inputColor.SelectedItem).Content.ToString();
-                database.ModifyPlayer(this.player);
+                await database.ModifyPlayerAsync(this.player);
+                await database.LoadDatasAsync();
                 ChoosePlayers choosePlayers = new ChoosePlayers(database);
                 this.Content = choosePlayers;
 
             }
             else
             {
-                if(inputName.Text != "" && inputColor.SelectedItem != null )    
+                if (inputName.Text != "" && inputColor.SelectedItem != null)
                 {
                     Player newPlayer = new Player();
                     newPlayer.Name = inputName.Text;
@@ -74,7 +63,8 @@ namespace Punto
                     newPlayer.Wins = 0;
                     newPlayer.LastWin = "Pas encore gagné (looser !)";
 
-                    database.AddPlayer(newPlayer);
+                    await database.AddPlayerAsync(newPlayer);
+                    await database.LoadDatasAsync();
                     ChoosePlayers choosePlayers = new ChoosePlayers(database);
                     this.Content = choosePlayers;
 
@@ -83,14 +73,14 @@ namespace Punto
                 {
                     MessageBox.Show("Merci de remplir tous les champs");
                 }
-                
+
             }
-            
         }
 
-        private void BtnSupprimer_Click(object sender, RoutedEventArgs e)
+        private async void BtnSupprimer_Click(object sender, RoutedEventArgs e)
         {
-            database.DeletePlayer(this.player);
+            await database.DeletePlayerAsync(this.player);
+            await database.LoadDatasAsync();
             ChoosePlayers choosePlayers = new ChoosePlayers(database);
             this.Content = choosePlayers;
         }

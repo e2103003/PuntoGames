@@ -54,12 +54,13 @@ namespace Punto
 
         }
 
-        private void Neo4j_Click(object sender, RoutedEventArgs e)
+        private async void Neo4j_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 DatabaseUse database = new DatabaseUse("Neo4j");
-                //ChangeView(database);
+                await database.LoadDatasAsync();
+                ChangeView(database);
             }
             catch (MySqlException ex)
             {

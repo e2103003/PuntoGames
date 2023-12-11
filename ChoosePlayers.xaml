@@ -9,8 +9,13 @@
         <Button VerticalAlignment="Top" HorizontalAlignment="Left" Click="ButtonBack_Click" IsCancel="True" Background="Transparent" BorderThickness="0">
             <Image Source="img/back.png" Height="50" />
         </Button>
+
+        <Button x:Name="ButtonNeo4j" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonNeo4j_Click"  Background="Transparent" BorderThickness="0" Margin="30,0" Visibility="Hidden">
+            <Image Source="img/logo_neo4j.png" Height="30" />
+        </Button>
+
         <TextBlock Text="Choix de la partie : " VerticalAlignment="Top"  HorizontalAlignment="Center" FontSize="30" Background="White"/>
-        <ScrollViewer Margin="0,50,0,0" >
+        <ScrollViewer Margin="0,50,0,0"  >
             <StackPanel  Orientation="Vertical">
 
                 <!-- Liste des joueurs -->

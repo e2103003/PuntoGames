@@ -20,6 +20,17 @@ namespace Punto
         {
             InitializeComponent();
             DataContext = this;
+
+            if(database.databaseTechno == "Neo4j")
+            {
+                ButtonNeo4j.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ButtonNeo4j.Visibility = Visibility.Hidden;
+                
+            }
+
             this.database = database;
             this.playerList = new List<Player>();
 
@@ -101,6 +112,13 @@ namespace Punto
             {
                 MessageBox.Show("Vous devez sélectionner au moins deux et maximum 4 joueurs pour lancer une partie !");
             }
+
+        }
+
+        private void ButtonNeo4j_Click(object sender, RoutedEventArgs e)
+        {
+            Neo4jBrowser neo4jBrowser = new Neo4jBrowser(database);
+            this.Content = neo4jBrowser;
 
         }
     }

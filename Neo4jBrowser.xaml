@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Punto.Neo4jBrowser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        mc:Ignorable="d" 
+    >
+    <Grid>
+        <TextBlock Text="Neo4J Browser :" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0"/>
+        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Click="ButtonBack_Click" IsCancel="True" Background="Transparent" BorderThickness="0">
+            <Image Source="/img/back.png" Height="50" />
+        </Button>
+        <wpf:WebView2 x:Name="neo4jWebView" Margin="40,50" Source="C:\Users\mariu\Documents\clone-git\PuntoGames\Database\neo4j-web\neo4j_browser_page.html"/>
+
+    </Grid>
+
+
+    
+</UserControl>
