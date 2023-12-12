@@ -79,7 +79,7 @@ namespace Punto
             }
         }
 
-        private void ButtonLancerPartie_Click(object sender, RoutedEventArgs e)
+        private async void ButtonLancerPartie_Click(object sender, RoutedEventArgs e)
         {
             if (playerList.Count > 1 && playerList.Count <=4)
             {
@@ -102,8 +102,10 @@ namespace Punto
                 }
                 else
                 {
+                    await database.CreateRelationship(playerList);
                     GameView gameView = new GameView(playerList, database);
                     this.Content = gameView;
+
                 }
             }
 

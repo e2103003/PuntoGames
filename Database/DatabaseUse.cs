@@ -215,6 +215,14 @@ namespace Punto
             
         }
 
+        public async Task CreateRelationship(List<Player> players)
+        {
+            if (databaseTechno == "Neo4j" && neo4jUse != null)
+            {
+                await neo4jUse.CreateRelationshipAsync(players);
+            }
+        }
+
 
         // méthode qui permet de générer des données aléatoires dans la base de données en fonction du nombre de joueurs
         public void GenerateDatas(double value)
